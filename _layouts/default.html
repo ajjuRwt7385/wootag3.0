@@ -1,0 +1,22 @@
+---
+layout: compress
+---
+<!DOCTYPE html>
+<html lang="{{ site.lang }}">
+
+  {% include head.html %}
+
+  <body data-page="{{ page.pName }}" class="{% if page.pName == 'explore' %} wt-theme-dark {% endif %}">    
+    <div class="container-fluid">
+
+      {% include header.html %}
+
+    <main class="wt-body row">
+      {{ content }}
+    </main>
+
+    {% include footer.html %}
+    </div>
+    {% include after-footer.html %}
+  </body>
+</html>

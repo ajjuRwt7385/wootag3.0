@@ -1,0 +1,65 @@
+<header id="wt-header" class="row">
+  <div class="overlay-subnav"></div> 
+  <div class="col-sm-12 wt-navbar-bg">
+    <nav class="wt-navbar row"> 
+      <div class="container">
+        <div class="wt-navbar-container">    
+          <div class="wt-navbar-logo">
+            <a class="wt-navbar-brand" href="{{ site.baseurl }}/"></a>
+          </div>          
+          <div class="wt-navbar-left">                
+            <ul class="wt-navbar-items">
+              <li class="{% if page.pName =='platform_tour' %}selected{% endif %}"><a href="{{ site.baseurl }}/platform-tour/">PLATFORM TOUR</a></li>
+              <li class="{% if page.pName == 'why_wootag_business' or page.pName == 'why_wootag_agencies' or page.pName == 'why_wootag_enterprise' %}selected{% endif %}">
+                <a href="#" id="nav-why-wootag">WHY WOOTAG  <i class="material-icons">arrow_drop_down</i></a>
+                <div class="navbar-dropdown row">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-sm-12 col-md-4 subnav-item">
+                        <a href="{{ site.baseurl }}/why-wootag/business/" class="subnav-link {% if page.pName =='why_wootag_business' %}selected{% endif %}">
+                          <div class="subnav-title">Business Owners</div>
+                          <p class="subnav-description">Give your videos powerful interactivity and generate more high-quality leads and sales</p>
+                          <div class="button-circular"><i class="material-icons">arrow_forward</i></div>
+                        </a>
+                      </div>
+                      <div class="col-sm-12 col-md-4 subnav-item">
+                        <a href="{{ site.baseurl }}/why-wootag/agencies/" class="subnav-link {% if page.pName =='why_wootag_agencies' %}selected{% endif %}">
+                          <div class="subnav-title">Agencies</div>
+                          <p class="subnav-description">Unlock the Real View Experience for your client campaigns with platform enabling interactivity</p>
+                          <div class="button-circular"><i class="material-icons">arrow_forward</i></div>
+                        </a>
+                      </div>
+                      <div class="col-sm-12 col-md-4 subnav-item">
+                        <a href="{{ site.baseurl }}/why-wootag/enterprise/" class="subnav-link {% if page.pName =='why_wootag_enterprise' %}selected{% endif %}">
+                          <div class="subnav-title">Enterprise</div>
+                          <p class="subnav-description">Improve your results with a scalable interactive video platform for business that will give a massive</p>
+                          <div class="button-circular"><i class="material-icons">arrow_forward</i></div>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="{% if page.pName =='explore' %}selected{% endif %}"><a href="{{ site.baseurl }}/explore/">EXPLORE</a></li>
+              <li class="{% if page.pName =='get_started' %}selected{% endif %}"><a href="{{ site.baseurl }}/get-started/">GET STARTED</a></li>
+              <li><a href="https://blog.wootag.com/" target="_blank">BLOG</a></li>
+            </ul>
+          </div>
+          <div class="mobile-menu-btn">
+            <div class="menu-open">                    
+              <div class="bar"></div>
+              <div class="bar"></div>
+            </div>
+            <div class="menu-close">
+              <div class="button-circular button--gray"><i class="material-icons">close</i></div>
+            </div>
+          </div>
+          <div class="wt-navbar-right">
+            <div class="login_link hide-for-small"><a href="{{ site.baseurl }}/signin/">LOGIN</a></div>
+            <a href="{{ site.baseurl }}/signup/"><div class="wt-button wt-button--navbar">TRY FOR FREE</div></a>
+          </div> 
+        </div>
+      </div>      
+    </nav>        
+  </div>
+</header>
