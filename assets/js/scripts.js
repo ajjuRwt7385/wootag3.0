@@ -189,7 +189,9 @@ $(document).on('ready', function() {
     asset_prefix: domain,
     api_registration_url: domain + '/api/v1/registration',
     api_categories_url: domain + '/api/categories',
-    api_contact_url: domain + '/api/contact'
+    api_contact_url: domain + '/api/contact',
+    api_pricing_url: domain + '/api/v1/pricingsubscription',
+    api_newsletter_subscribe_request_url: domain + '/api/newsletter/subscribe/'
   };
 
   var $form = $("#contact-form");
@@ -362,20 +364,48 @@ $(document).on('ready', function() {
     }
     case 'explore': {
       var allVideoItems = [];
+      var options = {view_count: "", video_count: ""};
       // fetch video items---
       $.ajax({url: domain+"/api/videos?category=", success: function(result){
         allVideoItems = result.items;
+        if (result.options && result.options.view_count) {
+          options.view_count = result.options.view_count;
+        }
+        if (result.options && result.options.video_count) {
+          options.video_count = result.options.video_count;
+        }
+        if(options.view_count && options.video_count) {
+          setViewVideoCount(options);
+        }
+
+        $('.explore_title').addClass('visible');
         handleExploreHash(location.hash || '#!/all');        
       }});
 
       // fetch video categories to set filter buttons on UI---
       $.getJSON(APP.api_categories_url, function (data) {
-        console.log(data);
         if(data && data.length) {
           processCategories(data);
         }
       });
 
+      // count animation---
+      // $('.count').each(function () {
+      //   $(this).prop('Counter',0).animate({
+      //       Counter: $(this).text()
+      //   }, {
+      //       duration: 1000,
+      //       easing: 'swing',
+      //       step: function (now) {
+      //           $(this).text(Math.ceil(now));
+      //       }
+      //   });
+      // });
+
+      function setViewVideoCount(options) {
+        $('.view_count').text(options.view_count);
+        $('.video_count').text(options.video_count);
+      }
       function processCategories(arr) {
         $('<li />', {
           class: 'all',
@@ -514,6 +544,7 @@ $(document).on('ready', function() {
               
               theTimeout = setTimeout(function(){
                 if (j === 0) {
+                  $('#home-demo-video').get(0).pause();
                   // activating the details black overlay background for mobiles---
                   $('.home-demo .details').addClass('active');
                   
@@ -522,7 +553,7 @@ $(document).on('ready', function() {
                     $('.home-demo .progress').removeClass('start');
                   }
                   // resetting the video to start position as now it is not in view---
-                  $('#home-demo-video').get(0).currentTime = 0;
+                  // $('#home-demo-video').get(0).currentTime = 0;
                 } else {
                   // swiping out the current showing tag detail---
                   validDetails.eq(j-1).addClass('disappear-right');
@@ -669,7 +700,7 @@ $(document).on('ready', function() {
         $('.platform-demo .progress').addClass('start');
 
         clearTimeout(theTimeout);
-        var theTimeout = setTimeout(function(){
+        var theTimeout = setTimeout(function(){          
           // tag preview appears---
           $('.platform-demo .tag-preview').removeClass('disapper');
           
@@ -680,6 +711,7 @@ $(document).on('ready', function() {
           var timeoutDuration = 2000;
           
           theTimeout = setTimeout(function(){
+            $('#platform-demo-video').get(0).pause();
             // activating the details black overlay background for mobiles---
             $('.platform-demo .details').addClass('active');
             
@@ -688,7 +720,7 @@ $(document).on('ready', function() {
               $('.platform-demo .progress').removeClass('start');
             }
             // resetting the video to start position as now it is not in view---
-            $('#platform-demo-video').get(0).currentTime = 0;
+            // $('#platform-demo-video').get(0).currentTime = 0;
 
             // trigger first detail item click to show it---
             $('.slider-platform-interactivity .slick-slide:nth-child('+(selectedObjectiveIndex + 1)+')').click();
@@ -700,6 +732,84 @@ $(document).on('ready', function() {
       // initializing demo animation---
       playDemoPlayerAnimation();
 
+      break;
+    }
+    case 'pricing': {
+      // var dummydata = {"_options":{"offers":{"title":"Bill Monthly","type":"toggle","description":"Bill Annually and Save 20%"},"plans":[{"id":36,"name":"Start-Up \/ Creators Plan","subplan":{},"description":"Best for Startups, Video Creators","currency":"US$","price":0,"frequency":"month","label":null,"features":[{"title":"5 Videos Limit","details":"Create 5 Interactive Videos for FREE"},{"title":"5k Views","details":"Free upto 5K Views every month"},{"title":"50 Interactions","details":"Enable upto 50 interactions by allowing viewers to click on the tags within video"},{"title":"Wootag Branding on Player","details":"Wootag watermark on the player"},{"title":"Embeds, Social Posts","details":"Embed your Interactive Videos within your sites, apps and distribute across social channels"},{"title":"Interactivity","details":"Enable Shoppable, Lead Gen, Booking and drive Games & Apps Objectives"},{"title":"Stats Access","details":"Track your Video Views, Interactions in real-time"}]},{"id":7,"name":"Business Plan","subplan":{"year":{"id":200,"name":"Business Annual","price":999,"frequency":"year"}},"description":"Best for Medium and Scaling Up Biz","currency":"US$","price":99,"frequency":"month","label":"UPGRADE NOW","features":[{"title":"Unlimited Videos","details":"Scale your Marketing with Unlimited Videos. No Caps"},{"title":"Unlimited Views","details":"Scale your Audience with Unlimited Views.No Caps"},{"title":"1000 Interactions","details":"Enable upto 1,000 interactions by allowing viewers to click on the tags within video"},{"title":"Custom Branding","details":"Make it your Own Branded Player by removing wootag watermark and add your brand colors"},{"title":"Embeds & Social Distributions","details":"Embed your Interactive Videos within your sites, apps with iFrame, Responsive and Pop-Over Scripts and distribute across social channels"},{"title":"Interactivity Pro","details":"Enable Interactivity Pro with Store Locator, Loyalty Offers, Showcase features"},{"title":"Stats Pro","details":"Enable Additional Stats to track Engagements and your biz objectives real-time"},{"title":"Apps","details":"Enable Tracker Apps to add GA \/ FB trackers to drive retargeting and acquisition"}]},{"id":12,"name":"Enterprise Plan","subplan":{},"description":"Best for Brands and Agencies","currency":"","price":null,"frequency":"","label":"Request a Demo","features":[{"title":"Unlimited Videos","details":"Scale your Marketing with Unlimited Videos. No Caps"},{"title":"Unlimited Views","details":"Scale your Audience with Unlimited Views.No Caps"},{"title":"Unlimited Interactions","details":"Convert all your Audience into Customers"},{"title":"Custom Branding","details":"Make it your Own Branded Player by removing wootag watermark and add your brand colors"},{"title":"Embeds & Social Distributions","details":"Embed your Interactive Videos within your sites, apps distribute across social channels"},{"title":"Interactive Ads","details":"Run In\/Out Stream \/ Mobile Native Ads across Networks, Programmatic Platforms"},{"title":"Facebook Ads","details":"Run Native FB Ad Units within Wootag Dashboard"},{"title":"Ad Serving & Tracking","details":"Ad Serving & Tracking"},{"title":"In-Depth Stats & Insights","details":"Unlimited access to Real-Time stats and insights"},{"title":"Apps","details":"Access to 3rd Party Apps to drive interactivity, distributions and performance"}]}]}};
+      $('.pricing>div:not(.loader)').addClass('hide');
+      var data = {};
+
+      $.ajax({url: APP.api_pricing_url, success: function(result){
+        data = result;
+        generatePlans(data);  
+        $('.pricing>div:not(.loader)').removeClass('hide');
+        $('.pricing>.loader').remove();
+      }});
+
+      function generatePlans(data) {
+        var offers = data._options.offers;
+        $('.pricing-toggle .before').text(offers.title);
+        $('.pricing-toggle .after').text(offers.description);
+
+        var plans = data._options.plans;
+        for (var i = 0; i<plans.length; i++) {
+          var $plan = $('.pricing-plans>div:nth-child('+ (i+1)+')');
+          var subplan = plans[i].subplan && plans[i].subplan.year;
+          var planName = plans[i].name;
+          var planPrice = plans[i].price;
+          var frequency = plans[i].frequency;
+          if (!!subplan && annualActive) {
+            planName = subplan.name;
+            planPrice = subplan.price;
+            frequency = subplan.frequency;
+          } 
+          $plan.find('.card .wt-title').text(planName);
+          $plan.find('.card p').text(plans[i].description);
+          var price = plans[i].currency + planPrice;
+          
+          if (plans[i].price === 0) {
+            price = 'FREE';
+            frequency = '';
+          } else if (plans[i].price === null) {
+            price = 'Let\'s Talk';
+            frequency = '';
+          }
+          $plan.find('.price .amount').text(price);
+          if(frequency) {
+            $plan.find('.price .frequency').html('per <span>' +frequency+'</span>');
+          } else {
+            $plan.find('.price .frequency').html('');
+          }
+          
+
+
+          var $featrues = $plan.find('.features');
+          var $feature = $featrues.find('.feature:first-child').clone();
+          $featrues.empty();
+          var features = plans[i].features;
+          for (var j = 0; j< features.length; j++) {
+            var newFeature = $feature.clone();
+            newFeature.find('.text').text(features[j].title);
+            newFeature.find('.sub-text').text(features[j].details);
+            $featrues.append(newFeature);
+          }
+        }
+      }
+      var annualActive = false;      
+
+      $('.pricing-toggle :checkbox').change(function() {
+        if (this.checked) {
+          annualActive = true;
+        } else {
+          annualActive = false;
+        }
+        generatePlans(data);
+      });
+      
+      $('.contact-now').on('click', function(e) {
+        e.preventDefault();
+        showOverlay({ type: 'contact'});
+      });
       break;
     }
     default: {
@@ -715,6 +825,9 @@ $(document).on('ready', function() {
       $('.overlay-lightbox iframe').attr('src', videoUrl+'?autoplay=1');
       $('.overlay-lightbox').addClass('visible');
       $('body').addClass('no-scroll');
+    } else if(type === 'contact') {
+      $('.overlay-lightbox.contact').addClass('visible');
+      $('body').addClass('no-scroll');
     }
   }
   function closeOverlay() {
@@ -722,7 +835,7 @@ $(document).on('ready', function() {
     $('.overlay-lightbox').removeClass('visible');
     $('body').removeClass('no-scroll');
   }
-  $('.overlay-lightbox .button-close').on('click', function(e) {
+  $('.overlay-lightbox .button-close, .overlay-lightbox .clickclose').on('click', function(e) {
     e.preventDefault();
     closeOverlay();
   });
@@ -736,6 +849,60 @@ $(document).on('ready', function() {
       }
     }
   });
+
+  (function(){
+    var $form = $("#newsletter-form"),
+                $inputs = $('#newsletter-form :input');
+
+            $form.submit(function (e) {
+                var $button = $form.find('.js-submit');
+                var values = {};
+                $inputs.each(function () {
+                    if (this.name) values[this.name] = $(this).val();
+                });
+                // console.log(values);
+                $.ajax({
+                    type: "POST",
+                    url: APP.api_newsletter_subscribe_request_url,
+                    crossDomain: true,
+                    cache: false,
+                    dataType: 'JSON',
+                    timeout: 6000,
+                    data: JSON.stringify(values),
+
+                    success: function success(data) {
+                        // cleaning the error message
+                        $('.form__feedback', $form).empty();
+                        $('.has-error').removeClass('has-error');
+
+                        console.log(data);
+
+                        if (!data.data.success) {
+
+                            var $errorDiv = $('.form__error', $form);
+
+                            $.each(data.data.errors, function (key, error) {
+                                $("input[name='" + key + "']", $form).addClass('has-error');
+                                // $( "input[name='" + key + "']", $form).after('<div class="form__feedback form__error">' + error + '</div>');
+                                // $errorDiv.append( error );
+                            });
+                        } else {
+
+                                // $button.val( data.message );
+
+                                if (data.data.redirect) window.location = APP.asset_prefix + data.data.redirect;
+                            }
+                    },
+
+                    error: function error(jqXHR, textStatus, errorThrown) {
+                        console.log("API error: " + textStatus + " - " + errorThrown.message);
+                        $(".form__feedback", $form).empty().append("API error: " + textStatus + " - " + errorThrown.message);
+                    }
+                });
+
+                e.preventDefault();
+            });
+  })();
 
 });
 
