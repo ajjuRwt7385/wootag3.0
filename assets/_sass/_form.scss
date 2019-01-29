@@ -1,38 +1,95 @@
 @import 'variables';
 
 .form-control{
-    border-radius: 5px;
+  border-radius: 5px;
 }
 ::placeholder{
-    font-size: 14px;
-    color: $color_text_light_gray !important;
+  font-size: 14px;
+  color: $color_text_light_gray !important;
 }
 .input-group-addon{
-    border-radius: 5px;
-    border:none;
+  border-radius: 5px;
+  border:none;
 }
 input {
-    height: 50px !important;
-    border: 1px solid $color_input_border !important;
-    background: white;
-    &.form-control.large{
-        height: 60px !important;
-        min-width: 200px;
-        border-radius: 8px;
-        font-size: 18px;
-        &::placeholder{
-            font-size: 18px !important;
-        }
+  height: 50px !important;
+  border: 1px solid $color_input_border !important;
+  background: white;
+  &.form-control.large{
+    height: 60px !important;
+    min-width: 200px;
+    border-radius: 8px;
+    font-size: 18px;
+    &::placeholder{
+      font-size: 18px !important;
     }
+  }
 }
 
 .wt-theme-dark{
+  input {
+    background: $color_theme_dark;
+    color: $color_text_white;
+    border-color: $color_dark_theme_hr !important;
+  }
+  ::placeholder{
+    color: $color_text_white !important;
+  }
+}
+
+.contact-form {
+  background-color: white;
+  h3{
+    font-size: 24px;
+    font-weight: 400;
+    margin-top: 0;
+    line-height: 1.3em;
+  }
+  label{
+    font-size: 12px;
+    font-weight: 500;
+    padding: 10px 0;
+  }
+  input {
+    margin-bottom: 10px;
+    &.has-error{
+      border-color: $color_wootag_red;
+    }
+  }
+  *[type=submit]{
+    margin-top:20px;
+    min-width: 180px;
+  }
+  .thanks-msg{
+    position: absolute;
+    left: 0;
+    top:0;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    background-color: rgba(255,255,255,0.95);
+    text-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
+    h1{
+      padding: 0 50px;
+      font-weight: 400;
+      color: $color_wootag_blue;
+    }
+  }
+  @media (min-width: 767px) {
+    h3{
+      font-size: 24px;
+    }
+    label{
+      padding: 20px 0;
+    }
     input {
-        background: $color_theme_dark;
-        color: $color_text_white;
-        border-color: $color_dark_theme_hr !important;
+      margin-bottom: 10px;
     }
-    ::placeholder{
-        color: $color_text_white !important;
+    *[type=submit]{
+      margin-top:30px;
     }
+  }
 }

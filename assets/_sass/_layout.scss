@@ -618,6 +618,7 @@ header{
     align-items: center;
     display: flex;
     @media (max-width: 768px) {
+      display: block;
       .col-sm-12{
         width: 100%;
       }
@@ -766,10 +767,18 @@ header{
 */
 .section-get_started{
   background: white;
+  position: relative;
+  z-index: 400;
+  p{
+    margin-bottom: 0;
+  }
 }
 .wt-theme-dark{
   .section-get_started{
     background: $color_theme_dark;
+    p{
+      color: $color_text_white;
+    }
   }
 }
 /*
@@ -783,6 +792,8 @@ header{
 footer{  
   background: white;
   border-top: 1px solid $color_light_gray;
+  position: relative;
+  z-index: 400;
   >div{
     padding: 20px 0;
   }
@@ -959,6 +970,14 @@ footer{
 /*
 * Platform Tour page styles---
 */
+.button-try-for-free{
+  .wt-button{
+    display: inline-flex;
+  }
+  &.align-center{
+    text-align: center;
+  }
+}
 .platform-interactivity{  
   .slider-platform-interactivity{
     margin-top: 30px;
@@ -1004,7 +1023,7 @@ footer{
       color: $color_text_dark_gray;
     }
     &:hover,
-    &.selected{
+    &.selected-slide{
       opacity:1;
     }
   }
@@ -1106,6 +1125,10 @@ footer{
         img{
           width:100%;
           height: auto;
+          &.noShadowMaxHeight{
+            max-height:500px;
+            box-shadow: none !important;
+          }
         }
         &.platform-analytics-img{
           .analytics-top-img{
@@ -1226,10 +1249,80 @@ footer{
     }
   }
 }
+
+.section-explore_videos{
+  position: relative;
+  .categories{
+    ul{
+      padding:0;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 20px 0;
+      li {        
+        a{
+          color: $color_text_light_gray;
+          transition: all 0.2s ease;
+          text-decoration: none;
+          background-color: transparent;
+          opacity: 0.5;
+          border-radius: 20px;
+          color: white;
+          text-transform: uppercase;
+          font-size: 12px;
+          font-weight: 500;
+          padding: 7px 20px;
+          line-height: 30px;
+          min-width: 110px;
+          &:hover{
+            opacity: 1;
+          }
+          &.selected{
+            opacity: 1;
+            background-color: rgba(255, 255, 255, 0.1);
+          }          
+        }
+      }
+      @media (min-width: 767px) {
+        li{
+          a{
+            font-size: 16px;
+            padding: 10px 35px;
+          }
+        }
+      }
+    }
+  }
+}
+
+
 #explore-videos{
   outline: none;
 }
+.view-more-videos{
+  width: 200px;
+  margin: 0 auto;
+}
+.categoryFilterRow{
+  position: absolute;
+  top: $header_height_mobile;
+  left:auto;
+  width: 100%;
+  z-index: 300;
+  background-color: rgba(18, 22, 31, 0.98);
+  &.hasScrolled{
+    position: fixed;    
+    top: $header_height_mobile;
+  }
+  @media (min-width: 767px) {
+    top: $header_scrolled_height;
+    &.hasScrolled{
+      top: $header_scrolled_height;
+    }
+  }
+}
 #explore_video_items{
+  margin-top: 100px;
   .video_item{
     overflow: hidden;
     margin-bottom:30px;
@@ -1265,8 +1358,10 @@ footer{
       .button-circular{
         min-height:60px;
         min-width:60px;
+        border-color: white;
         i{
           font-size: 24px;
+          color: white;
         }
       }
       .detail{
@@ -1276,9 +1371,11 @@ footer{
       .title{
         font-size: 24px;
         font-weight: 300;
+        line-height: 1.2em;
       }
       .category{
         font-size: 12px;
+        line-height: 1.6em;
         text-transform: capitalize;
       }
       &:hover{
@@ -1292,6 +1389,7 @@ footer{
         .button-circular{
           background-color: $color_wootag_blue;
           color: $color_text_white;
+          border-color: $color_wootag_blue;
         }
       }
     }
@@ -1316,6 +1414,10 @@ footer{
   background:#E1E4EB;
   height: 100vh;
   width: 50vw;
+  display: none;
+  @media (min-width: 767px) {
+    display: block;
+  }
 }
 .sign-in-up-container{
   overflow-x: hidden;
@@ -1336,7 +1438,7 @@ footer{
     margin: 0 0 24px;
   }
   .wt-button{
-    width: 200px;
+    min-width: 200px;
     margin-top: 5px;
     display: inline-block;
   }
@@ -1357,7 +1459,19 @@ footer{
     color: $color_text_dark_gray;
   }
 }
-
+.reset_password{
+  min-height: 50vh;
+  h3{
+    font-size: 24px;
+    line-height: 1.3em;
+    @media (min-width: 767px) {
+      font-size: 36px;
+    }
+  }
+  .wt-button{
+    display: inline-flex;
+  }
+}
 
 /*
 Why Wootag---
@@ -1372,15 +1486,64 @@ Why Wootag---
   .section-subtitle{
     margin-bottom: 30px;
   }
+  &.enterprise{
+    display: block;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 70px 0 60px;
+    .img{
+      position: relative;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+    .contact-form.whyEnterprise {
+      width: 100%;
+      padding: 30px 30px 50px;
+      box-shadow: none;
+      border-bottom: 1px solid $color_light_gray;
+      position: relative;
+      z-index: 1;
+      
+    }
+    @media (min-width: 767px) {
+      display: flex;
+      .img{
+        position: absolute;
+      }
+      .contact-form.whyEnterprise {
+        width: 50%;
+        margin-right: 20px;
+        padding: 50px 50px 70px;
+        box-shadow: 0px 16px 80px rgba(0, 0, 0, 0.3);
+        border-color: transparent;
+      }
+    }
+  }  
 }
 .above-features-title{
   margin-bottom:30px;
+  display: inline-block;
 }
 .why-wootag-features{
   margin-top:20px;
   text-align: center;
   .feature-section{
     margin-top:30px;
+    height: 100%;
+    >div{
+      background-color: rgba(225, 228, 235, 0.2);
+      height: inherit;
+      padding-bottom: 30px;
+    }
+    @media (min-width: 767px) {
+      >div{
+        min-height: 620px;
+      }
+    }
   }
   
   img {
@@ -1388,10 +1551,11 @@ Why Wootag---
     height: auto;
   }
   h3{
-    font-weight: 300;
+    font-weight: 400;
     font-size: 24px;
     min-height: inherit;
     margin: 40px 0 20px;
+    padding: 0 30px;
     @media (min-width: 767px) {
       min-height: 50px;
     }
@@ -1851,6 +2015,121 @@ Why Wootag---
         }
         .detail-img{
           flex:6;
+          position: relative;
+          .marker {            
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            right: 0;
+            top:0;
+            &::before {
+              width: 120px;
+              height: 120px;
+              background-color: rgba(244, 67, 54, 0.2);
+              content: '';
+              display: inline-block;
+              border-radius: 100%;
+              overflow: hidden;
+              position: absolute;
+              left: 50%;
+              top: 50%;
+              margin: -60px 0 0 -60px;
+              border: 2px solid rgba(244, 67, 54, 0.3);
+            }
+            &::after{
+              width: 10px;
+              height: 10px;
+              background-color: rgba(244, 67, 54, 1);
+              content: '';
+              display: inline-block;
+              border-radius: 100%;
+              overflow: hidden;
+              position: absolute;
+              left: 50%;
+              top: 50%;
+              margin: -5px 0 0 -5px;
+            }
+            
+          }
+        }
+      }
+
+      &.showcase{
+        >div{
+          background: black;
+          .detail-content {
+            padding: 0 0 0 70px;
+            .text{
+              .title{
+                height: 100px;
+                display: flex;
+                align-items: center;
+                color: white;
+                font-size: 14px;
+                font-weight: 500;
+                margin-left: 40px;
+              }
+              .images{
+                display: flex;
+                .img{
+                  margin-right: 30px;
+                  &:last-child{
+                    margin-right: 0;
+                  }
+                }
+              }
+              .controls{
+                display: flex;
+                height: 90px;
+                align-items: center;
+                justify-content: space-between;
+                width: 100%;
+                .bars{
+                  display: flex;
+                  margin-left: 40px;
+                  .bar{                    
+                    width: 20px;
+                    height: 4px;
+                    background: white;
+                    opacity: 0.2;
+                    margin-right: 10px;
+                    &.selected{
+                      opacity: 1;
+                    }
+                  }
+                }
+                .link{
+                  color: white;
+                  font-size: 14px;
+                  font-weight: 500;
+                  margin-right: 40px;
+                  line-height: 24px;
+                  display: inline-flex;
+                  i{
+                    margin-left: 10px;
+                  }
+                }
+              }
+            }
+            .button-circular {
+              i {
+                color: white;
+              }
+            }
+          }
+        }
+        @media (min-width: 767px) {
+          >div {
+            .detail-content {
+              .button-circular {
+                &:hover {
+                  i {
+                    color: $color_text_dark_gray;
+                  }
+                }
+              }
+            }
+          }
         }
       }
 
@@ -1940,6 +2219,17 @@ Why Wootag---
             }
           }
         }
+        @media (min-width: 767px) {
+          .detail-content {
+            .button-circular {
+              &:hover {
+                i {
+                  color: $color_text_dark_gray;
+                }
+              }
+            }
+          }          
+        }
       }
       
     }
@@ -1963,5 +2253,45 @@ Why Wootag---
         }
       }
     }
+  }
+}
+
+// About Page---
+.wt-timeline{
+  margin-top:40px;
+  >div{
+    display: flex;
+    margin: 30px 0;
+  }
+  .year{
+    font-size: 24px;
+    color: $color_text_dark_gray;
+    width: 20%;
+    line-height: 1.3em;
+  }
+  .progress-points {
+    width: 80%;
+    ul {
+      margin: 0;
+      padding: 0;
+      li {
+        font-size: 18px;
+        font-weight: 400;
+        color: $color_text_light_gray;
+        line-height: 1.6em;
+        margin-bottom: 5px;
+        &::before {
+          content: '•';
+          margin-right: 5px;
+        }
+      }
+    }
+  }
+}
+
+.team {
+  .wt-button {
+    width: 274px;
+    margin-top:20px;
   }
 }

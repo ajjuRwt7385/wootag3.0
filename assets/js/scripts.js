@@ -1,20 +1,37 @@
-// When the user scrolls the page, execute stickyNavFunc 
-window.onscroll = function() {stickyNavFunc()};
 
 // Get the header
 var header = document.getElementById("wt-header");
 
-// Get the offset position of the navbar
-var sticky = header.offsetTop;
+if (header) {
+  // When the user scrolls the page, execute stickyNavFunc 
+  window.onscroll = function() {stickyNavFunc()};
+  // Get the offset position of the navbar
+  var sticky = header.offsetTop;
 
-// Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
-function stickyNavFunc() {
-  if (window.pageYOffset > sticky) {
-    header.classList.add("hasScrolled");
-  } else {
-    header.classList.remove("hasScrolled");
+  // Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
+  function stickyNavFunc() {
+    if (window.pageYOffset > sticky) {
+      header.classList.add("hasScrolled");
+    } else {
+      header.classList.remove("hasScrolled");
+    }
+
+    if (videoSection && categoryFilter) {
+      stickyFilter(videoSection.offsetTop);
+    }
+  }
+  // for explore page category filters---
+  var videoSection = document.getElementById("explore-videos");
+  var categoryFilter = document.getElementById("categoryFilter");
+  function stickyFilter(stickyExplore) {
+    if (window.pageYOffset > stickyExplore) {
+      categoryFilter.classList.add("hasScrolled");
+    } else {
+      categoryFilter.classList.remove("hasScrolled");
+    }
   }
 }
+
 // utils- hostname---
 var host = window.location.hostname === 'localhost' ? 'wtstaging.wootag.com' : window.location.hostname;
 var domain = `https://${host}`;
@@ -35,6 +52,23 @@ function extractHostname(url) {
   hostname = hostname.split('?')[0];
 
   return hostname;
+}
+
+function urlParam(variable){
+  try{
+      var q = location.search.substring(1),
+          v = q.split("&"),
+          p, str, n;
+      for( var i = 0; i < v.length; i++ ){
+          p = v[i].split("=");
+          if( p[0] == variable ){
+              return p[1] && decodeURIComponent(p[1]);
+          }
+      }
+  }
+  catch (e){
+      console.log(e);
+  }
 }
 //---
 $(document).on('ready', function() {
@@ -92,7 +126,8 @@ $(document).on('ready', function() {
   });
   
   //------------------------------------------------------------------------------------------------
-  
+  // AOS (Animation On Scroll)---
+  AOS.init();
   //------------------------------------------------------------------------------------------------
 
   // Sit back slider---
@@ -131,11 +166,18 @@ $(document).on('ready', function() {
           var $target = $(target);
           $target.focus();
           if ($target.is(":focus")) { // Checking if the target was focused
+            if ($target.attr('id') === 'enterprise-form') {
+              $target.find('input#contact_name').focus();
+            }
             return false;
           } else {
             $target.attr('tabindex','-1'); // Adding tabindex for elements not focusable
-            $target.focus(); // Set focus again
+            $target.focus(); // Set focus again            
           };
+          
+          if ($target.attr('id') === 'enterprise-form') {
+            $target.find('input#contact_name').focus();
+          }
         });
       }
     }
@@ -146,8 +188,52 @@ $(document).on('ready', function() {
     api_login_url: domain + '/api/login',
     asset_prefix: domain,
     api_registration_url: domain + '/api/v1/registration',
+    api_categories_url: domain + '/api/categories',
+    api_contact_url: domain + '/api/contact'
+  };
+
+  var $form = $("#contact-form");
+  if($form) {
+    $form.submit(function (e) {
+
+      // var $button = $form.find('.js-submit');
+      $form.find('.thanks-msg').removeClass('hide');
+      $.ajax({
+        type: "POST",
+        url: APP.api_contact_url,
+        crossDomain: true,
+        cache: false,
+        dataType: 'JSON',
+        timeout: 6000,
+        data: $form.serialize(),
+  
+        success: function success(data) {
+            // cleaning the error message
+            $('.form__feedback', $form).empty();
+            $('.has-error').removeClass('has-error');
+  
+            console.log(data);
+  
+            if (!data.success) {
+              $form.find('.thanks-msg').addClass('hide');
+              $.each(data.errors, function (key, error) {
+                  $("input[name='" + key + "']", $form).addClass('has-error');
+              });
+            } else {
+              $form.find('.thanks-msg').removeClass('hide').find('> h1').text(data.message);
+            }
+        },
+  
+        error: function error(jqXHR, textStatus, errorThrown) {
+            console.log("API error: " + textStatus + " - " + errorThrown.message);
+            $(".form__feedback", $form).empty().append("API error: " + textStatus + " - " + errorThrown.message);
+        }
+      });
+      e.preventDefault();
+    });
   }
-  // Explore page videos fetch---
+  
+  // Page wise events---
   var currentPage = $('body').data('page');
   console.log('currentPage', currentPage);
   switch(currentPage) {
@@ -225,7 +311,11 @@ $(document).on('ready', function() {
       var $form = $( "#signup-form" ),
       $inputs = $('#signup-form :input');
 
-    $form.submit( function(e) {
+      var $emailField = $form.find('input[type=email]');
+      var email = urlParam('email');
+      email && $emailField && ($emailField.val(email));
+
+      $form.submit( function(e) {
         var values = {};
         $inputs.each(function() {
           if (this.name) values[this.name] = $(this).val();
@@ -267,30 +357,103 @@ $(document).on('ready', function() {
 
           e.preventDefault();
 
-    });
+      });
       break;
     }
     case 'explore': {
+      var allVideoItems = [];
       // fetch video items---
       $.ajax({url: domain+"/api/videos?category=", success: function(result){
-        var items = result.items;
-        console.log('items', items);
-        items.forEach((item, idx) => {
-          
-          if($('#explore_video_items').length) {
-            var hostName = item.wootag_url && extractHostname(item.wootag_url);
-            var videoUrl = hostName && '//'+hostName+'/embed/'+item.playback_id;
-            $('#explore_video_items').append('<div class="col-sm-12 col-md-6 video_item"><a href="#" data-href="'+videoUrl+'" data-type="overlay-iframe"><div class="img"><img src="'+item.img+'" alt="'+item.title+'" /><div class="overlay"><div class="button-circular"><i class="material-icons">play_arrow</i></div><div class="detail"><div class="title">'+item.title+'</div><div class="category">'+item.category+'</div></div></div></div></a></div>');
-            // $('#explore_video_items').append('<div class="col-sm-12 col-md-6 video_item"><div class="iframe-responsive"><iframe src="'+videoUrl+'" width="100%" height="480"></iframe></div></div>');
+        allVideoItems = result.items;
+        handleExploreHash(location.hash || '#!/all');        
+      }});
+
+      // fetch video categories to set filter buttons on UI---
+      $.getJSON(APP.api_categories_url, function (data) {
+        console.log(data);
+        if(data && data.length) {
+          processCategories(data);
+        }
+      });
+
+      function processCategories(arr) {
+        $('<li />', {
+          class: 'all',
+          'data-category': 'all',
+          html: '<a href="#!/all">All</a>'
+        }).appendTo('.categories ul');
+        for (var i = 0; i< arr.length; i++) {
+          $('<li />', {
+            class: arr[i].slug,
+            'data-category': arr[i].slug,
+            html: '<a href="#!/'+arr[i].slug+'">'+ arr[i].name +'</a>'
+          }).appendTo('.categories ul');
+        }       
+        
+        handleExploreHash(location.hash || '#!/all');
+      }
+
+      // hash change events which get triggered through filter button clicks---
+      window.onhashchange = function(){
+        var hash = location && location.hash;
+        if (hash) {
+          handleExploreHash(hash);
+        }
+      }
+      
+      // event handler and filter setter for the videos as per category---
+      function handleExploreHash(hash) {
+        var category = hash.split('#!/')[1] || 'all';
+        // selected state for the hash item---
+        $('.categories ul>li').each(function(){
+          if($(this).find('>a').hasClass('selected')) {
+            $(this).find('>a').removeClass('selected');
           }
-        });        
+          if($(this).find('>a').prop('href').indexOf(category) !== -1) {
+            $(this).find('>a').addClass('selected');
+          }          
+        });          
+
+        var items = category === 'all' ? allVideoItems : allVideoItems.filter(item => item.category === category);
+        // console.log('item', items);
+        if($('#explore_video_items').length) {
+          $('#explore_video_items').empty();
+          items.forEach((item, idx) => {
+              var hostName = item.wootag_url && extractHostname(item.wootag_url);
+              var videoUrl = hostName && '//'+hostName+'/embed/'+item.playback_id;
+              if(idx % 8 === 0) {
+                $('#explore_video_items').append('<div class="row hide" data-rowId="'+ (idx / 8) +'" data-aos="fade-in"></div>');
+              }
+              var fadeEffect = idx % 2 === 0 ? 'fade-right' : 'fade-left';
+              $('#explore_video_items > .row:last-child').append('<div class="col-sm-12 col-md-6 video_item" data-aos="'+ fadeEffect +'"><a href="#" data-href="'+videoUrl+'" data-type="overlay-iframe"><div class="img"><img src="'+item.img+'" alt="'+item.title+'" /><div class="overlay"><div class="button-circular"><i class="material-icons">play_arrow</i></div><div class="detail"><div class="title">'+item.title+'</div><div class="category">'+item.category+'</div></div></div></div></a></div>');
+          });
+
+          var numOfLastRowInView = 0;
+          $('#explore_video_items > .row:first-child').removeClass('hide');
+          function checkShowMoreVisiblity() {
+            var showViewMoreButton = $('#explore_video_items > .row:last-child').hasClass('hide');
+            if (showViewMoreButton) {
+              $('.view-more-videos').removeClass('hide');
+            } else {
+              $('.view-more-videos').addClass('hide');
+            }
+            AOS.init();
+          }
+          checkShowMoreVisiblity();
+          $('.view-more-videos a').on('click', function(e){
+            e.preventDefault();
+            numOfLastRowInView++;
+            $('#explore_video_items > .row:nth-child('+ (numOfLastRowInView + 1) +')').removeClass('hide');
+            checkShowMoreVisiblity();
+          })
+        }        
         // item click event to show iframe video in overlay---
         $('.video_item a').on('click', function(e){
           e.preventDefault();
           var videoUrl = $(this).data('href');
           showOverlay({ type: 'iframe', href: videoUrl });
         });
-      }});
+      }   
       
       break;
     }
@@ -378,7 +541,12 @@ $(document).on('ready', function() {
         
       }
       // initializing demo animation---
+      document.getElementById('home-demo-video').addEventListener('loadeddata', function() {
+        // Video is loaded and can be played
+        playDemoPlayerAnimation();
+      }, false);
       playDemoPlayerAnimation();
+      
       break;
     }
     case 'platform_tour': {
@@ -532,15 +700,13 @@ $(document).on('ready', function() {
       // initializing demo animation---
       playDemoPlayerAnimation();
 
-      
-      // AOS (Animation On Scroll)---
-      AOS.init();
       break;
     }
     default: {
       return;
     }
   }
+  
   // closing overlay event for all pages--
   function showOverlay(data) {
     var type = data && data.type;
@@ -570,6 +736,7 @@ $(document).on('ready', function() {
       }
     }
   });
+
 });
 
 

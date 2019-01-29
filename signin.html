@@ -1,0 +1,43 @@
+---
+layout: default
+title: "Register for a new wootag account"
+keywords: ""
+description: ""
+summary: "SignIn page"
+includegetstarted: "false"
+includeheader: "false"
+includefooter: "false"
+pName: "signin"
+---
+
+<div class="container-fluid sign-in-up-container">
+  <div class="row">
+    <div class="container">
+      <!-- Login Form -->
+      <div class="row row-centered zIndexOne">
+        <div class="col-sm-12 col-md-6 row__padTB100">       
+          <div class="wt-navbar-logo">
+            <a class="wt-navbar-brand" href="{{ site.baseurl }}/"></a>
+          </div>     
+          <h1 class="wt-title wt-title__large" data-aos="fade-left">Welcome Back</h1>
+          <form id="login-form" class="wt-form">
+            <ul class="form__error"></ul>
+            <div class="form-group">
+              <div class="signin-label-aligner"><label for="email">EMAIL ADDRESS</label></div>
+              <input type="email" required class="form-control" id="email" placeholder="you@example.com" name="email">
+            </div>
+            <div class="form-group">
+              <div class="signin-label-aligner"><label for="password">PASSWORD</label><a href="{{ site.baseurl }}/forgot-password/" class="link-wt-blue">Forgot Password?</a></div>
+              <input type="password" required class="form-control" id="password" placeholder="Enter your password" name="password">
+            </div>                  
+            <button type="submit" class="button wt-button">LOGIN</button>
+            <div class="no-account">Don't have an account? <a href="{{ site.baseurl }}/signup/" class="link-wt-blue">Try Wootag for Free</a></div>
+          </form>                
+        </div>
+        <div class="col-sm-12 col-md-6">
+          <div class="bg-gray"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

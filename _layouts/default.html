@@ -8,14 +8,18 @@ layout: compress
 
   <body data-page="{{ page.pName }}" class="{% if page.pName == 'explore' %} wt-theme-dark {% endif %}">    
     <div class="container-fluid">
-
+      {% if page.includeheader != 'false' %}
       {% include header.html %}
-
-    <main class="wt-body row">
+      {% endif %}
+    <main class="{% if page.pName != 'signup' and page.pName != 'signin' and page.pName != 'forgot_password' %} wt-body {% endif %} row">
       {{ content }}
+      {% if page.includegetstarted != 'false' %}
+        {% include section-get-started.html %}
+      {% endif %}
     </main>
-
+    {% if page.includefooter != 'false' %}
     {% include footer.html %}
+    {% endif %}
     </div>
     {% include after-footer.html %}
   </body>
