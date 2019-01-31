@@ -501,7 +501,7 @@ div.hr{
   .overlay-content{
     max-width:none;
     width:100%;
-    background-color: $color_theme_dark;
+    // background-color: $color_theme_dark;
     position: relative;
     margin: 0 auto;
     text-align: left;
@@ -673,4 +673,34 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+
+
+
+.slick-slider{
+  display: none;
+  opacity: 0;
+  transform: all 0.2s ease;
+  &.slick-initialized{
+    opacity: 1;
+    display: block;
+  }
+  *{
+    outline: none;
+  }
+}
+
+.hide-on-mobile{
+  display: none;
+}
+.show-on-mobile{
+  display: inline;
+}
+@media (min-width: 767px) {
+  .hide-on-mobile{
+    display: inline;
+  }
+  .show-on-mobile{
+    display: none;
+  }
 }

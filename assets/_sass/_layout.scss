@@ -165,6 +165,9 @@ header{
     &.selected{
       a{
         color: $color_wootag_blue;
+        > i{
+          color: $color_wootag_blue;
+        }
       }
     }
   }
@@ -176,6 +179,7 @@ header{
 .hide-for-small{
   display: none;
 }
+
 // dropdown subnav for why-wootag-page---
 .navbar-dropdown{
   background: white;
@@ -551,6 +555,16 @@ header{
   //   opacity: 0;
   // }
 }
+@keyframes pulsate {
+  0%{
+    opacity: 1;
+    transform: scale(0);
+  }
+  50%, 100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
 /*
 // Persona Section Starts---
 */
@@ -569,7 +583,7 @@ header{
   a:hover{
     .persona-img{
       img{
-        transform: scale(1.02);
+        transform: scale(1.04);
       }
     }
   }
@@ -1422,6 +1436,7 @@ footer{
 .bg-gray{
   background:#E1E4EB;
   height: 100vh;
+  min-height: 100%;
   width: 50vw;
   display: none;
   @media (min-width: 767px) {
@@ -1454,6 +1469,7 @@ footer{
   .no-account{
     margin-top:50px;
     color: $color_text_light_gray;
+    line-height: 1.3em;
   }
 }
 #login-form,
@@ -1727,7 +1743,7 @@ Why Wootag---
     }
     >.overlay-blocker{
       position: absolute;
-      z-index: 1;
+      z-index: 1000;
       top:0;
       left:0;
       width: inherit;
@@ -1887,6 +1903,10 @@ Why Wootag---
         @media (min-width: 767px) {
           input.large{
             margin-top:20px;
+            height: 60px !important;
+            &::placeholder{
+              font-size: 18px !important;
+            }
           }
         }
       }
@@ -2004,6 +2024,7 @@ Why Wootag---
           font-size:16px;
           color: $color_text_light_gray;
           display: flex;
+          align-items: center;
           margin-bottom:20px;
         }
 
@@ -2106,7 +2127,7 @@ Why Wootag---
             &::before {
               width: 60px;
               height: 60px;
-              background-color: rgba(244, 67, 54, 0.2);
+              background-color: rgba(244, 67, 54, 0.3);
               content: '';
               display: inline-block;
               border-radius: 100%;
@@ -2115,7 +2136,8 @@ Why Wootag---
               left: 50%;
               top: 50%;
               margin: -30px 0 0 -30px;
-              border: 2px solid rgba(244, 67, 54, 0.3);
+              border: 2px solid rgba(244, 67, 54, 0.4);
+              animation: pulsate 2s infinite ease-out;
             }
             &::after{
               width: 10px;

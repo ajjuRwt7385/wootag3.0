@@ -4,6 +4,7 @@ title: "Register for a new wootag account"
 keywords: ""
 description: ""
 summary: "SignUp page"
+addBodyClass: "false"
 includegetstarted: "false"
 includeheader: "false"
 includefooter: "false"
@@ -19,7 +20,7 @@ pName: "signup"
           <div class="wt-navbar-logo">
             <a class="wt-navbar-brand" href="{{ site.baseurl }}/"></a>
           </div>              
-          <h1 class="wt-title wt-title__large" data-aos="fade-left">Create your free account</h1>
+          <h1 class="wt-title wt-title__large">Create your free account</h1>
           <form id="signup-form" class="wt-form" method="POST" accept-charset="UTF-8" action="/registration" autocomplete="off" role="Form">
             <ul class="form__error"></ul>
             <input type="hidden" name="plan-name" value="Personal" />
@@ -36,12 +37,12 @@ pName: "signup"
               <input type="password" required class="form-control" id="password" placeholder="5+ characters" name="password">
             </div>                  
             <button type="submit" class="button wt-button">SIGN UP</button>
-            <div class="no-account">By clicking Sign Up You agree to the <a href="{{ site.baseurl }}/terms/" target="_blank" class="link-wt-blue">Terms of Service</a> and <a href="{{ site.baseurl }}/privacy-policy/" target="_blank" class="link-wt-blue">Privacy Policy</a><br /><br />Already have an account? <a href="{{ site.baseurl }}/signin/" class="link-wt-blue">Login</a></div>
+            <div class="no-account">By clicking Sign Up You agree to the <a href="{{ site.baseurl }}/terms/" target="_blank" class="link-wt-blue">Terms of Service</a> and <a href="{{ site.baseurl }}/privacy-policy/" target="_blank" class="link-wt-blue">Privacy Policy</a><br /><br />Already have an account? <span class="hide-on-mobile"><a href="{{ site.baseurl }}/signin/" class="link-wt-blue">Login</a></span><span class="show-on-mobile">Please login through desktop to access the dashboard.</span></div>
           </form>                
         </div>
-        <div class="col-sm-12 col-md-6">
+        <!-- <div class="col-sm-12 col-md-6">
           <div class="bg-gray"></div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>

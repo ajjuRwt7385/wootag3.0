@@ -100,7 +100,7 @@ $(document).on('ready', function() {
   });
   // Logo slider for home and explore page---
   $('.slider-client-logos').slick({
-    autoplay: true,
+    autoplay: false,
     infinite: true,
     arrows: false,
     // variableWidth: true,
@@ -111,6 +111,7 @@ $(document).on('ready', function() {
       {
         breakpoint: 992,
         settings: {
+          autoplay: false,
           slidesToShow: 4,
           slidesToScroll: 4
         }
@@ -118,6 +119,7 @@ $(document).on('ready', function() {
       {
         breakpoint: 480,
         settings: {
+          autoplay: true,
           slidesToShow: 3,
           slidesToScroll: 3
         }
@@ -194,44 +196,47 @@ $(document).on('ready', function() {
     api_newsletter_subscribe_request_url: domain + '/api/newsletter/subscribe/'
   };
 
-  var $form = $("#contact-form");
-  if($form) {
-    $form.submit(function (e) {
+  var $forms = $(".contact-form form");
+  if($forms.length) {
+    $forms.each(function(idx){
+      var $form = $forms.eq(idx);
+      $form.submit(function (e) {
 
-      // var $button = $form.find('.js-submit');
-      $form.find('.thanks-msg').removeClass('hide');
-      $.ajax({
-        type: "POST",
-        url: APP.api_contact_url,
-        crossDomain: true,
-        cache: false,
-        dataType: 'JSON',
-        timeout: 6000,
-        data: $form.serialize(),
-  
-        success: function success(data) {
-            // cleaning the error message
-            $('.form__feedback', $form).empty();
-            $('.has-error').removeClass('has-error');
-  
-            console.log(data);
-  
-            if (!data.success) {
-              $form.find('.thanks-msg').addClass('hide');
-              $.each(data.errors, function (key, error) {
-                  $("input[name='" + key + "']", $form).addClass('has-error');
-              });
-            } else {
-              $form.find('.thanks-msg').removeClass('hide').find('> h1').text(data.message);
-            }
-        },
-  
-        error: function error(jqXHR, textStatus, errorThrown) {
-            console.log("API error: " + textStatus + " - " + errorThrown.message);
-            $(".form__feedback", $form).empty().append("API error: " + textStatus + " - " + errorThrown.message);
-        }
+        // var $button = $form.find('.js-submit');
+        $form.find('.thanks-msg').removeClass('hide');
+        $.ajax({
+          type: "POST",
+          url: APP.api_contact_url,
+          crossDomain: true,
+          cache: false,
+          dataType: 'JSON',
+          timeout: 6000,
+          data: $form.serialize(),
+    
+          success: function success(data) {
+              // cleaning the error message
+              $('.form__feedback', $form).empty();
+              $('.has-error').removeClass('has-error');
+    
+              console.log(data);
+    
+              if (!data.success) {
+                $form.find('.thanks-msg').addClass('hide');
+                $.each(data.errors, function (key, error) {
+                    $("input[name='" + key + "']", $form).addClass('has-error');
+                });
+              } else {
+                $form.find('.thanks-msg').removeClass('hide').find('> h1').text(data.message);
+              }
+          },
+    
+          error: function error(jqXHR, textStatus, errorThrown) {
+              console.log("API error: " + textStatus + " - " + errorThrown.message);
+              $(".form__feedback", $form).empty().append("API error: " + textStatus + " - " + errorThrown.message);
+          }
+        });
+        e.preventDefault();
       });
-      e.preventDefault();
     });
   }
   
@@ -339,16 +344,32 @@ $(document).on('ready', function() {
 
           signupRequest.done( function( data ) {
 
-              // console.log(data);
+              console.log(data);
               if ( data.data.description) {
                   
                   $.each( data.code, function( key, error ) {
                     $errorDiv.append( '<li>' + error );
                   });
               }
+              if (data.data.token) {
+                var expires = "";
+                var name = "wootag-access-token";
+                var value = data.data.token;
+                var rtName = "wootag-access-refresh_token";
+                var rtValue = data.data.refresh_token || '';
+                document.cookie = name + "=" + value + expires + ";path=/";
+                document.cookie = rtName + "=" + rtValue + expires + ";path=/";
+
+                if (data.data.redirect_page) {
+                  window.location = domain + data.data.redirect_page;
+                } else {
+                  window.location = domain + '/apps/authenticate?token='+value+'&refresh_token='+rtValue;
+                }                                
+              } else if (data.data.redirect_page) window.location = domain + data.data.redirect_page;
           });
 
-          signupRequest.fail( function(jqXHR, textStatus) {
+          signupRequest.fail( function(jqXHR, textStatus, errorThrown) {
+            console.log('jqXHR', jqXHR, 'textStatus', textStatus, 'errorThrown', errorThrown);
             var data = (jqXHR.responseText) ? JSON.parse(jqXHR.responseText) : null;
             console.log("API status: " + jqXHR.status + "-" + textStatus + " from " + APP.api_registration_url);
             if(422===jqXHR.status && data) {
@@ -446,6 +467,21 @@ $(document).on('ready', function() {
 
         var items = category === 'all' ? allVideoItems : allVideoItems.filter(item => item.category === category);
         // console.log('item', items);
+        function str_pad_left(string,pad,length) {
+          return (new Array(length+1).join(pad)+string).slice(-length);
+        }
+        function fomratSecondsToMMSS(_sec) {
+          var hours = Math.floor(_sec / 3600);
+          var minutes = Math.floor(_sec / 60);
+          var seconds = _sec % 60;
+          if (hours) {
+            minutes = Math.floor((_sec - (hours * 3600)) / 60);
+            seconds = _sec - (hours * 3600) - (minutes * 60);
+            return str_pad_left(hours,'0',1)+':'+str_pad_left(minutes,'0',2)+':'+str_pad_left(seconds,'0',2);
+          }
+          // return minutes +':'+ seconds;
+          return str_pad_left(minutes,'0',1)+':'+str_pad_left(seconds,'0',2);
+        }
         if($('#explore_video_items').length) {
           $('#explore_video_items').empty();
           items.forEach((item, idx) => {
@@ -455,7 +491,7 @@ $(document).on('ready', function() {
                 $('#explore_video_items').append('<div class="row hide" data-rowId="'+ (idx / 8) +'" data-aos="fade-in"></div>');
               }
               var fadeEffect = idx % 2 === 0 ? 'fade-right' : 'fade-left';
-              $('#explore_video_items > .row:last-child').append('<div class="col-sm-12 col-md-6 video_item" data-aos="'+ fadeEffect +'"><a href="#" data-href="'+videoUrl+'" data-type="overlay-iframe"><div class="img"><img src="'+item.img+'" alt="'+item.title+'" /><div class="overlay"><div class="button-circular"><i class="material-icons">play_arrow</i></div><div class="detail"><div class="title">'+item.title+'</div><div class="category">'+item.category+'</div></div></div></div></a></div>');
+              $('#explore_video_items > .row:last-child').append('<div class="col-sm-12 col-md-6 video_item" data-aos="'+ fadeEffect +'"><a href="#" data-href="'+videoUrl+'" data-type="overlay-iframe"><div class="img"><img src="'+item.img+'" alt="'+item.title+'" /><div class="overlay"><div class="button-circular"><i class="material-icons">play_arrow</i></div><div class="detail"><div class="title">'+item.title+'</div><div class="category">'+fomratSecondsToMMSS(item.video_duration) +' | '+ item.category+'</div></div></div></div></a></div>');
           });
 
           var numOfLastRowInView = 0;
@@ -539,8 +575,11 @@ $(document).on('ready', function() {
           // as for mobiles we just have 2 tags instead of 3 we are looping through the tagLength for showing the right number of tag detail---
           for(var j = 0; j<tagsLength; j++){
             (function(j){
-              // default duration is 2s per details---
-              var timeoutDuration = 2000 * (j+1);
+              // default duration is 4s per details---
+              var timeoutDuration = 4000 * (j+1);
+              if (j === 0){
+                timeoutDuration = 2000;
+              }
               
               theTimeout = setTimeout(function(){
                 if (j === 0) {
@@ -806,6 +845,13 @@ $(document).on('ready', function() {
         generatePlans(data);
       });
       
+      $('.contact-now').on('click', function(e) {
+        e.preventDefault();
+        showOverlay({ type: 'contact'});
+      });
+      break;
+    }
+    case 'why_wootag_enterprise':{
       $('.contact-now').on('click', function(e) {
         e.preventDefault();
         showOverlay({ type: 'contact'});

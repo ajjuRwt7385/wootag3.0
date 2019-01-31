@@ -11,7 +11,7 @@ layout: compress
       {% if page.includeheader != 'false' %}
       {% include header.html %}
       {% endif %}
-    <main class="{% if page.pName != 'signup' and page.pName != 'signin' and page.pName != 'forgot_password' %} wt-body {% endif %} row">
+    <main class="{% if page.addBodyClass != 'false' %} wt-body {% endif %} row">
       {{ content }}
       {% if page.includegetstarted != 'false' %}
         {% include section-get-started.html %}

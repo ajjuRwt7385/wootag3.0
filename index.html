@@ -14,8 +14,8 @@ pName: "home"
           <!-- Go beyond views -->
           <div class="row row-centered row__padTB100 row__padT120 zIndexOne">
             <div class="col-sm-12 col-md-8">            
-              <h1 class="wt-title wt-title__large">Go beyond views</h1>
-              <p>Empowering human curiosity with simple and immersive interactions, right within your videos.</p>
+              <h1 class="wt-title wt-title__large" data-aos="fade-up">Go beyond views</h1>
+              <p class="large" data-aos="fade-up">Empowering human curiosity with simple and immersive interactions, right within your videos.</p>
               <div class="play-button-with-text">
                 <a href="#" class="go-beyond-views-link" data-href="//www.wootag.com/embed/473ABC-9612-AEEB7D722D-8C9E-499A?autoplay=1"><div class="button-circular"><i class="material-icons">play_arrow</i></div><span>WATCH VIDEO</span></a>
               </div>
@@ -80,7 +80,7 @@ pName: "home"
                           </div>
                         </div>
                         <div class="tag-preview disappear">
-                          <div class="tag-img" style="background-image:url({{ site.baseurl }}/assets/images/watch-thumb.png)"></div>
+                          <div class="tag-img" style="background-image:url({{ site.baseurl }}/assets/images/detail-commerce.jpg)"></div>
                           <div class="tag-title">Unisex T-shirt in black $29.00</div>
                           <div class="wt-button button--red tag-button">SHOP NOW</div>
                           <div class="click-simulate"></div>
@@ -89,7 +89,7 @@ pName: "home"
                       <div class="details home-fake-player-details">
                         <div class="detail">
                           <div>
-                            <div class="detail-img" style="background-image:url({{ site.baseurl }}/assets/images/detail-commerce.png)"></div>
+                            <div class="detail-img" style="background-image:url({{ site.baseurl }}/assets/images/detail-commerce.jpg)"></div>
                             <div class="detail-content">
                               <div class="text">
                                 <h3 class="wt-title">Unisex T-shirt in black $29.00</h3>
@@ -122,20 +122,26 @@ pName: "home"
                                 </ul>
                               </div>
                             </div>
-                            <div class="detail-img" style="background-image:url({{ site.baseurl }}/assets/images/map-storelocator.png)">
+                            <div class="detail-img" style="background-image:url({{ site.baseurl }}/assets/images/map-storelocator.jpg)">
                               <div class="marker"></div>
                               <div class="button-circular button--gray filled"><i class="material-icons">close</i></div>
                             </div>
                           </div>
                         </div>
-                        <div class="detail">
+                        <div class="detail showcase" data-item="Showcase" data-index="3">
                           <div>
-                            <div class="detail-img" style="background-image:url({{ site.baseurl }}/assets/images/watch1.png)"></div>
                             <div class="detail-content">
                               <div class="text">
-                                <h3 class="wt-title">Title for Decision Tag</h3>
-                                <p>Our revolutionary video experience turns viewers into customers by letting them interact with your video.</p>
-                                <div class="wt-button">Buy Now</div>
+                                <div class="title">Lookbook FW19</div>
+                                <div class="images">
+                                  <div class="img"><img src="{{ site.baseurl }}/assets/images/showcase1.png" alt="showcse demo" /></div>
+                                  <div class="img"><img src="{{ site.baseurl }}/assets/images/showcase2.png" alt="showcse demo" /></div>
+                                  <div class="img"><img src="{{ site.baseurl }}/assets/images/showcase3.png" alt="showcse demo" /></div>
+                                </div>
+                                <div class="controls">
+                                  <div class="bars"><div class="bar selected"></div><div class="bar"></div><div class="bar"></div></div>
+                                  <div class="link">Learn More <i class="material-icons">arrow_forward</i></div>
+                                </div>
                               </div>
                               <div class="button-circular button--gray"><i class="material-icons">close</i></div>
                             </div>
@@ -176,8 +182,8 @@ pName: "home"
                 <div class="row">
                   <div class="col-xs-12 col-sm-6 col-md-4 noHoriPaddingOnMobile">
                     <div class="persona-card">
-                      <a href="{{ site.baseurl }}/why-wootag-business">
-                        <div class="persona-img"><img src="{{ site.baseurl }}/assets/images/business-owners-interactive-video-platform.png" alt="business-owners-interactive-video-technology-platform-for-video-marketing-campaign"/></div>
+                      <a href="{{ site.baseurl }}/why-wootag/business/">
+                        <div class="persona-img"><img src="{{ site.baseurl }}/assets/images/business-owners-interactive-video-platform.jpg" alt="business-owners-interactive-video-technology-platform-for-video-marketing-campaign"/></div>
                         <div class="persona-text">
                           <h3>Business Owners</h3>
                           <p>Generate more high-quality leads and sales by transforming your videos into powerful interactions</p>
@@ -188,7 +194,7 @@ pName: "home"
                   </div>
                   <div class="col-xs-12 col-sm-6 col-md-4 noHoriPaddingOnMobile">
                     <div class="persona-card">
-                      <a href="{{ site.baseurl }}/why-wootag-agencies">
+                      <a href="{{ site.baseurl }}/why-wootag/agencies/">
                         <div class="persona-img"><img src="{{ site.baseurl }}/assets/images/advertising-agencies-interactive-video-platform.jpg" alt="advertising-agencies-interactive-video-technology-platform-solutions-for-video-marketing-campaign"/></div>
                         <div class="persona-text">
                           <h3>Agencies</h3>
@@ -200,7 +206,7 @@ pName: "home"
                   </div>
                   <div class="col-xs-12 col-sm-6 col-md-4 noHoriPaddingOnMobile">
                     <div class="persona-card">
-                      <a href="{{ site.baseurl }}/why-wootag-enterprise">
+                      <a href="{{ site.baseurl }}/why-wootag/enterprise/">
                         <div class="persona-img"><img src="{{ site.baseurl }}/assets/images/enterprise-interactive-video-platform.jpg" alt="wootag-enterprise-interactive-video-technology-platform-for-video-marketing-campaign"/></div>
                         <div class="persona-text">
                           <h3>Enterprise</h3>
