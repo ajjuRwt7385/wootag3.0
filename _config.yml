@@ -9,13 +9,10 @@
 title: Wootag
 email: raj@wootag.com
 keywords: wootag
-description: > # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
+description: Wootag is a revolutionary interactive video platform that lets your viewers engage with your brand and make purchases across multiple social media platforms – all from inside your video.
 baseurl: "" # the subpath of your site, e.g. /blog
 lang: "en"
-url: "" # the base hostname & protocol for your site
+url: "https://www.wootag.com" # the base hostname & protocol for your site
 twitter_username: ajjuRwt
 github_username:  ajjuRwt7385
 disqus_username:

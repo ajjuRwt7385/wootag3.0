@@ -6,7 +6,7 @@ layout: compress
 
   {% include head.html %}
 
-  <body data-page="{{ page.pName }}" class="{% if page.pName == 'explore' %} wt-theme-dark {% endif %}">    
+  <body data-page="{{ page.pName }}" class="{% if page.pName == 'explore' %} wt-theme-dark {% endif %} ready" style="opacity:0;">    
     <div class="container-fluid">
       {% if page.includeheader != 'false' %}
       {% include header.html %}

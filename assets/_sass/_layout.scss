@@ -2,7 +2,8 @@
 // Header Starts---
 */
 header{
-  &::before {
+  // &::before,
+  .overlay-subnav {
     position: fixed;
     left:0;
     top:0;
@@ -46,7 +47,8 @@ header{
       }
     }    
     &.subnav-active{
-      &::before{
+      // &::before{
+      .overlay-subnav{  
         opacity: 1;
         display: block !important;
       }
@@ -422,19 +424,50 @@ header{
 // Home Logo Slider---
 */
 .slider-client-logos{
+  .slick-track{
+    display: flex;
+    align-items: center;
+  }
   margin-bottom:50px;
+  >div{
+    display: none;
+    opacity: 0;;
+  }
   .slick-slide{
-    width:140px;
+    // width:140px;
+    overflow: hidden;
     img{
       margin:0 auto;
     }
   }
-  &.explore-logos{
+  &.explore-logos,
+  &.agencies-logos,
+  &.enterprise-logos{
     margin: 50px 0 20px;
     .slick-slide{
       img{
         margin: 0;
       }
+    }
+  }
+}
+.agencies-logos{
+  margin: 40px 0 20px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  >div{
+    margin: 10px 30px 10px 0;
+  }
+  &.enterprise-logos {
+    >div{
+      margin: 10px 40px 10px 0;
+    }
+  }
+  @media (min-width:767px){
+    >div{
+      margin: 10px 40px 10px 0;
     }
   }
 }
@@ -659,6 +692,11 @@ header{
       margin: 15px 0;
       width: 80px;
       opacity:0.5;
+    }
+    &.noHeader{
+      &::before {
+        display: none;
+      }
     }
     .comment-text{
       color: $color_text_white;
@@ -995,6 +1033,15 @@ footer{
     text-align: center;
   }
 }
+.autoProgressBar{
+  position: absolute;
+  z-index: 100;
+  bottom:0;
+  left:0;
+  height: 2px;
+  background-color: $color_wootag_blue;
+  transition: all ease;
+}
 .platform-interactivity{  
   .slider-platform-interactivity{
     margin-top: 30px;
@@ -1143,8 +1190,11 @@ footer{
           width:100%;
           height: auto;
           &.noShadowMaxHeight{
-            max-height:500px;
+            max-height:none;
             box-shadow: none !important;
+            @media (min-width:767px) {
+              max-height: 500px;
+            }
           }
         }
         &.platform-analytics-img{
@@ -1345,7 +1395,7 @@ footer{
   }
 }
 #explore_video_items{
-  margin-top: 100px;
+  margin-top: 150px;
   .video_item{
     overflow: hidden;
     margin-bottom:30px;
@@ -1355,13 +1405,16 @@ footer{
       position: relative;
       outline: 0;
       overflow: hidden;
-      .img{
+      .img{        
         position: relative;
         height: 0;
         padding-bottom: 56.25%;
         background-color: #fff;
         margin: 0;
+        overflow: hidden;
         img{
+          transform: scale(1);
+          transition: all 0.3s ease-in-out;
           width: 100%;
           height: auto;
         }
@@ -1399,16 +1452,21 @@ footer{
       .category{
         font-size: 12px;
         line-height: 1.6em;
-        text-transform: capitalize;
+        // text-transform: capitalize;
       }
       &:hover{
-        .overlay{
-          background-color: rgba(0,0,0,0);
-        }
-        .detail{
-          color: $color_wootag_blue;
-          text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4); 
-        }
+        .img{
+          img{
+            transform: scale(1.04);
+          }
+        }        
+        // .overlay{
+        //   background-color: rgba(0,0,0,0);
+        // }
+        // .detail{
+        //   color: $color_wootag_blue;
+        //   text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4); 
+        // }
         .button-circular{
           background-color: $color_wootag_blue;
           color: $color_text_white;
@@ -1427,6 +1485,9 @@ footer{
         }
       }
     }
+  }
+  @media (min-width:768px) {
+    margin-top: 100px;
   }
 }
 
@@ -1601,6 +1662,15 @@ Why Wootag---
   overflow: hidden;
   left: 0;
   top: 0;
+  &::before {
+    position: absolute;
+    left:0;
+    bottom:0;
+    width:100%;
+    height: 40%;
+    background-image: linear-gradient(rgba(13, 12, 36, 0), rgba(13, 12, 36, 0.8));
+    content: '';
+  }
   .timeline{
     position: absolute;
     left: 5%;
@@ -1610,11 +1680,11 @@ Why Wootag---
       position: absolute;
       left:0;
       width:100%;
-      height:1px;
+      height:2px;
     }
     .base {
       width:100%;
-      height:1px;
+      height:2px;
       background-color: rgba(255, 255, 255, 0.2);
     }
     .progress{
@@ -1622,8 +1692,8 @@ Why Wootag---
       left:0;
       top:0;
       width:20%;
-      height:1px;
-      background-color: $color_wootag_blue;
+      height:2px;
+      background-color: #FFC400;
       transition: all 0.01s linear;
       &.start{
         width: 50%;
@@ -1634,10 +1704,10 @@ Why Wootag---
       width: 100%;
       .dot{
         position: absolute;
-        top:-2px;
+        top:-4px;
         border-radius: 100%;
-        width:4px;
-        height:4px;
+        width:8px;
+        height:8px;
         background: white;
       }
     }
@@ -1704,7 +1774,7 @@ Why Wootag---
       
       @media (min-width: 767px) {
         background: white;
-        width: 250px;
+        width: 320px;
         height: 60px;
         bottom: 20px;
         transform: translateX(0);
@@ -1721,7 +1791,7 @@ Why Wootag---
           text-transform: uppercase;
         }
         .tag-button{
-          display: none;
+          // display: none;
         }
       }
       &.disapper{
@@ -1743,7 +1813,7 @@ Why Wootag---
     }
     >.overlay-blocker{
       position: absolute;
-      z-index: 1000;
+      z-index: 100;
       top:0;
       left:0;
       width: inherit;
@@ -1853,7 +1923,7 @@ Why Wootag---
             padding: 80px 70px;
             flex: 6;
             h3{
-              font-size: 36px;
+              font-size: 28px;
             }
             p{
               font-size: 20px;
@@ -1894,10 +1964,10 @@ Why Wootag---
         input.large{
           margin-top:0px;
           height: 36px !important;
-          line-height: 1em;
+          // line-height: 1.6em;
           &::placeholder{
             font-size: 14px !important;
-            line-height: 36px;
+            // line-height: 36px !important;
           }
         }
         @media (min-width: 767px) {
@@ -1906,6 +1976,7 @@ Why Wootag---
             height: 60px !important;
             &::placeholder{
               font-size: 18px !important;
+              // line-height: 48px !important;
             }
           }
         }
@@ -1979,6 +2050,60 @@ Why Wootag---
               padding: 0 50px;
             }
           }
+        }
+      }
+      &.commerce-home{        
+        .detail-content{
+          padding: 20px 20px;
+          .wt-button{
+            background: $color_wootag_new_blue;
+            color: white;
+            
+          }
+          .color-options{
+            display: none;
+            height:40px;
+            width: 100%;
+            .circle{
+              display: flex;
+              border-radius: 100%;
+              min-width:40px;
+              height: 40px;
+              background: $color_gray;
+              margin-right: 20px;
+              
+              justify-content: center;
+              align-items: center;
+              &.green {
+                background: $color_green;
+              }
+              &.orange {
+                background: $color_orange;
+              }
+              i{
+                color: white;
+              }
+            }
+          }
+          @media (min-width:479px) {
+            .color-options{
+              display: flex;
+            }
+            .wt-button{
+              height: 48px !important;
+            }
+          }
+          @media (min-width:767px) {
+            padding: 60px 70px;
+            .text {
+              p{
+                font-size: 16px;
+              }
+            }          
+            .wt-button{
+              height: 56px !important;
+            }
+          }          
         }
       }
       &.booking{
@@ -2065,13 +2190,58 @@ Why Wootag---
       }
 
       &.poll{
+        // >div{
+        //   .detail-content{
+        //     padding: 60px 70px;
+        //   }
+        // }
         .poll-options{
           display: flex;
           justify-content: space-between;
           .poll-option{
             width: 30%;
-            border-radius: 24px;
-            overflow: hidden;
+            text-align: center;
+            .img{
+              border-radius: 24px;
+              overflow: hidden;
+            }
+            .name{
+              font-size: 14px;
+              color: $color_text_dark_gray;
+              margin-top: 5px;
+            }
+          }
+        }
+        @media(min-width: 479px) {
+          .poll-options{
+            margin-top:20px;
+            .poll-option{
+              .name{
+                font-size: 18px;
+                margin-top: 18px;
+              }
+            }
+          }
+          >div{
+            .detail-content{
+              padding: 30px 40px;
+            }
+          }
+        }
+        @media(min-width: 767px) {
+          .poll-options{
+            margin-top:20px;
+            .poll-option{
+              .name{
+                font-size: 20px;
+                margin-top: 20px;
+              }
+            }
+          }
+          >div{
+            .detail-content{
+              padding: 60px 70px;
+            }
           }
         }
       }
@@ -2084,6 +2254,7 @@ Why Wootag---
           box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.3);
           position: relative;
           .text{
+            width:100%;
             h3{
               font-size: 18px;
               font-weight: 400;
@@ -2159,6 +2330,7 @@ Why Wootag---
           .detail-content{
             padding: 60px 0 0;
             flex: 4;
+            
             .text{
               h3{
                 font-size: 28px;
@@ -2179,6 +2351,14 @@ Why Wootag---
                     margin-top:12px;
                   }
                 }
+              }
+            }
+          }
+          &.home-storelocator{
+            .detail-content{
+              flex:3.4;
+              .text{
+                width:100%;
               }
             }
           }

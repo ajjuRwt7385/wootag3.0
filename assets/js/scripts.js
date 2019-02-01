@@ -98,6 +98,9 @@ $(document).on('ready', function() {
     }
     $('.navbar-dropdown').slideToggle(200);
   });
+  $('header .overlay-subnav').on('click', function(e){
+    $('#nav-why-wootag').click();
+  });
   // Logo slider for home and explore page---
   $('.slider-client-logos').slick({
     autoplay: false,
@@ -105,13 +108,21 @@ $(document).on('ready', function() {
     arrows: false,
     // variableWidth: true,
     autoplaySpeed: 5000,
-    slidesToShow: 6,
-    slidesToScroll: 6,
+    slidesToShow: 7,
+    slidesToScroll: 7,
     responsive: [      
       {
         breakpoint: 992,
         settings: {
           autoplay: false,
+          slidesToShow: 4,
+          slidesToScroll: 4
+        }
+      },
+      {
+        breakpoint: 680,
+        settings: {
+          autoplay: true,
           slidesToShow: 4,
           slidesToScroll: 4
         }
@@ -193,7 +204,7 @@ $(document).on('ready', function() {
     api_categories_url: domain + '/api/categories',
     api_contact_url: domain + '/api/contact',
     api_pricing_url: domain + '/api/v1/pricingsubscription',
-    api_newsletter_subscribe_request_url: domain + '/api/newsletter/subscribe/'
+    api_newsletter_subscribe_request_url: domain + '/api/sitenewsletter/subscribe'
   };
 
   var $forms = $(".contact-form form");
@@ -491,7 +502,7 @@ $(document).on('ready', function() {
                 $('#explore_video_items').append('<div class="row hide" data-rowId="'+ (idx / 8) +'" data-aos="fade-in"></div>');
               }
               var fadeEffect = idx % 2 === 0 ? 'fade-right' : 'fade-left';
-              $('#explore_video_items > .row:last-child').append('<div class="col-sm-12 col-md-6 video_item" data-aos="'+ fadeEffect +'"><a href="#" data-href="'+videoUrl+'" data-type="overlay-iframe"><div class="img"><img src="'+item.img+'" alt="'+item.title+'" /><div class="overlay"><div class="button-circular"><i class="material-icons">play_arrow</i></div><div class="detail"><div class="title">'+item.title+'</div><div class="category">'+fomratSecondsToMMSS(item.video_duration) +' | '+ item.category+'</div></div></div></div></a></div>');
+              $('#explore_video_items > .row:last-child').append('<div class="col-sm-12 col-md-6 video_item" data-aos="'+ fadeEffect +'"><a href="#" data-href="'+videoUrl+'" data-type="overlay-iframe"><div class="img"><img src="'+item.img+'" alt="'+item.title+'" /><div class="overlay"><div class="button-circular button--pulsate"><i class="material-icons">play_arrow</i></div><div class="detail"><div class="title">'+item.title+'</div><div class="category">'+fomratSecondsToMMSS(item.video_duration) +' | '+ item.category_name+'</div></div></div></div></a></div>');
           });
 
           var numOfLastRowInView = 0;
@@ -533,9 +544,9 @@ $(document).on('ready', function() {
       // Fake Home Demo Player data---
       // removing storelocator tag for mobiles---
       if(window.innerWidth < 768) {
-        $('.home-fake-player-details >.detail:nth-child(2)').addClass('hide-on-small');
+        $('.home-fake-player-details >.detail:nth-child(3)').addClass('hide-on-small');
       } else {
-        $('.home-fake-player-details >.detail:nth-child(2)').removeClass('hide-on-small');
+        $('.home-fake-player-details >.detail:nth-child(3)').removeClass('hide-on-small');
       }
       // valid detail tags to show in demo---
       var validDetails = $('.home-fake-player-details').find('>.detail:not(.hide-on-small)');
@@ -628,6 +639,7 @@ $(document).on('ready', function() {
         slidesToScroll: 8,
         nextArrow:$('.interactivity-slide-next-button'),
         prevArrow:$('.interactivity-slide-prev-button'),
+        focusOnSelect: true,
         responsive: [      
           {
             breakpoint: 992,
@@ -683,6 +695,18 @@ $(document).on('ready', function() {
         });
         // show detail---
         showPlatformDemoDetail(selfIndex);
+        // auto animate---
+        $('.autoProgressBar').width('0%').stop().animate({
+          width: '100%'
+        }, 6000, 'linear', function() {
+          var indexToClick = selectedObjectiveIndex;
+          if (indexToClick >= $('.platform-interactivity .interactivity-item-detail').length - 1 ) {
+            indexToClick = 0;
+          } else {
+            indexToClick++;
+          }
+          $('.slider-platform-interactivity .slick-slide:nth-child('+(indexToClick + 1)+')').click();
+        });
       });
       //init platform slider---
       // $('.slider-platform-interactivity .slick-slide:first-child').click();
@@ -851,7 +875,8 @@ $(document).on('ready', function() {
       });
       break;
     }
-    case 'why_wootag_enterprise':{
+    case 'why_wootag_enterprise':
+    case 'why_wootag_agencies': {
       $('.contact-now').on('click', function(e) {
         e.preventDefault();
         showOverlay({ type: 'contact'});
@@ -901,50 +926,51 @@ $(document).on('ready', function() {
                 $inputs = $('#newsletter-form :input');
 
             $form.submit(function (e) {
-                var $button = $form.find('.js-submit');
-                var values = {};
-                $inputs.each(function () {
-                    if (this.name) values[this.name] = $(this).val();
-                });
+                window.location = APP.asset_prefix + '/newsletter/subscribe/confirmation/';
+                // var $button = $form.find('.js-submit');
+                // var values = {};
+                // $inputs.each(function () {
+                //     if (this.name) values[this.name] = $(this).val();
+                // });
                 // console.log(values);
-                $.ajax({
-                    type: "POST",
-                    url: APP.api_newsletter_subscribe_request_url,
-                    crossDomain: true,
-                    cache: false,
-                    dataType: 'JSON',
-                    timeout: 6000,
-                    data: JSON.stringify(values),
+                // $.ajax({
+                //     type: "POST",
+                //     url: APP.api_newsletter_subscribe_request_url,
+                //     crossDomain: true,
+                //     cache: false,
+                //     dataType: 'JSON',
+                //     timeout: 6000,
+                //     data: JSON.stringify(values),
 
-                    success: function success(data) {
-                        // cleaning the error message
-                        $('.form__feedback', $form).empty();
-                        $('.has-error').removeClass('has-error');
+                //     success: function success(data) {
+                //         // cleaning the error message
+                //         $('.form__feedback', $form).empty();
+                //         $('.has-error').removeClass('has-error');
 
-                        console.log(data);
+                //         console.log(data);
 
-                        if (!data.data.success) {
+                //         if (!data.data.success) {
 
-                            var $errorDiv = $('.form__error', $form);
+                //             var $errorDiv = $('.form__error', $form);
 
-                            $.each(data.data.errors, function (key, error) {
-                                $("input[name='" + key + "']", $form).addClass('has-error');
-                                // $( "input[name='" + key + "']", $form).after('<div class="form__feedback form__error">' + error + '</div>');
-                                // $errorDiv.append( error );
-                            });
-                        } else {
+                //             $.each(data.data.errors, function (key, error) {
+                //                 $("input[name='" + key + "']", $form).addClass('has-error');
+                //                 // $( "input[name='" + key + "']", $form).after('<div class="form__feedback form__error">' + error + '</div>');
+                //                 // $errorDiv.append( error );
+                //             });
+                //         } else {
 
-                                // $button.val( data.message );
+                //                 // $button.val( data.message );
 
-                                if (data.data.redirect) window.location = APP.asset_prefix + data.data.redirect;
-                            }
-                    },
+                //                 if (data.data.redirect) window.location = APP.asset_prefix + data.data.redirect;
+                //             }
+                //     },
 
-                    error: function error(jqXHR, textStatus, errorThrown) {
-                        console.log("API error: " + textStatus + " - " + errorThrown.message);
-                        $(".form__feedback", $form).empty().append("API error: " + textStatus + " - " + errorThrown.message);
-                    }
-                });
+                //     error: function error(jqXHR, textStatus, errorThrown) {
+                //         console.log("API error: " + textStatus + " - " + errorThrown.message);
+                //         $(".form__feedback", $form).empty().append("API error: " + textStatus + " - " + errorThrown.message);
+                //     }
+                // });
 
                 e.preventDefault();
             });
