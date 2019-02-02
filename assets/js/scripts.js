@@ -70,6 +70,8 @@ function urlParam(variable){
       console.log(e);
   }
 }
+
+var iOS = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
 //---
 $(document).on('ready', function() {
   // Responsive mobile navigation toggle---
@@ -531,7 +533,10 @@ $(document).on('ready', function() {
           showOverlay({ type: 'iframe', href: videoUrl });
         });
       }   
-      
+      // removing the pulsating button class from persona cards as it forces two clicks on link to open in iOS devices---
+      if(iOS) {
+        $('.button--pulsate').removeClass('button--pulsate');
+      }
       break;
     }
     case 'home' : {
@@ -628,6 +633,10 @@ $(document).on('ready', function() {
       }, false);
       playDemoPlayerAnimation();
       
+      // removing the pulsating button class from persona cards as it forces two clicks on link to open in iOS devices---
+      if(iOS) {
+        $('.button--pulsate').removeClass('button--pulsate');
+      }
       break;
     }
     case 'platform_tour': {
@@ -922,8 +931,8 @@ $(document).on('ready', function() {
   });
 
   (function(){
-    var $form = $("#newsletter-form"),
-                $inputs = $('#newsletter-form :input');
+    var $form = $("#newsletter-form");
+                // $inputs = $('#newsletter-form :input');
 
             $form.submit(function (e) {
                 window.location = APP.asset_prefix + '/newsletter/subscribe/confirmation/';

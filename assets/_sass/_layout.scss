@@ -36,7 +36,7 @@ header{
       top: 0;
     }
   }
-  @media (min-width: 768px) {
+  @media (min-width: 767px) {
     &.hasScrolled {
       height: $header_scrolled_height;
       .wt-navbar-container{
@@ -1185,16 +1185,25 @@ footer{
       .platform-item-img{
         display: block;
         justify-content: flex-end;
+        margin-bottom: 20px;
+        text-align: center;
         // min-width: 100%;
         img{
           width:100%;
           height: auto;
-          &.noShadowMaxHeight{
-            max-height:none;
-            box-shadow: none !important;
-            @media (min-width:767px) {
-              max-height: 500px;
+          &.noMaxWidthHeight{
+            max-height:none !important;
+            max-width: none !important;
+            @media (min-width:992px) {
+              max-height: 500px !important;
+              &.analytics{
+                max-height: 363px !important;
+                
+              }
             }
+          }
+          &.noShadow{
+            box-shadow: none !important;
           }
         }
         &.platform-analytics-img{
@@ -1453,7 +1462,7 @@ footer{
         font-size: 12px;
         line-height: 1.6em;
         // text-transform: capitalize;
-      }
+      } 
       &:hover{
         .img{
           img{
@@ -1472,7 +1481,7 @@ footer{
           color: $color_text_white;
           border-color: $color_wootag_blue;
         }
-      }
+      }     
     }
     @media (min-width: 768px) {
       a{
@@ -1482,7 +1491,10 @@ footer{
         }
         .overlay {
           padding: 0 80px;
-        }
+        }        
+        // @media (pointer: fine) {
+          
+        // }
       }
     }
   }
