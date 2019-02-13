@@ -641,9 +641,9 @@ div.hr{
 .switch {
   position: relative;
   display: inline-block;
-  width: 60px;
-  min-width: 60px;
-  height: 34px;
+  width: 64px;
+  min-width: 64px;
+  height: 32px;
   margin:0;
 }
 
@@ -668,10 +668,10 @@ div.hr{
 .slider:before {
   position: absolute;
   content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
+  height: 16px;
+  width: 16px;
+  left: 8px;
+  bottom: 8px;
   background-color: white;
   -webkit-transition: .2s;
   transition: .2s;
@@ -681,14 +681,14 @@ input:checked + .slider {
   background-color: #66bb6a;
 }
 
-input:focus + .slider {
-  box-shadow: 0 0 1px #66bb6a;
-}
+// input:focus + .slider {
+  // box-shadow: 0 0 1px #66bb6a;
+// }
 
 input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
+  -webkit-transform: translateX(32px);
+  -ms-transform: translateX(32px);
+  transform: translateX(32px);
 }
 
 /* Rounded sliders */
@@ -724,5 +724,31 @@ input:checked + .slider:before {
   }
   .show-on-mobile{
     display: none;
+  }
+}
+
+/* mixin for multiline */
+@mixin multiLineEllipsis($lineHeight: 1.2em, $lineCount: 1, $bgColor: white){
+  overflow: hidden;
+  position: relative;
+  line-height: $lineHeight;
+  max-height: $lineHeight * $lineCount; 
+  text-align: justify;
+  margin-right: -1em;
+  padding-right: 1em;
+  &:before {
+    content: '...';
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+  &:after {
+    content: '';
+    position: absolute;
+    right: 0;
+    width: 1em;
+    height: 1em;
+    margin-top: 0.2em;
+    background: $bgColor;
   }
 }

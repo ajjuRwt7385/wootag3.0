@@ -315,7 +315,7 @@ $(document).on('ready', function() {
                 loginRequest.fail( function(jqXHR, textStatus) {
                   var data = (jqXHR.responseText) ? JSON.parse(jqXHR.responseText) : null;
                   console.log("API status: " + jqXHR.status + "-" + textStatus + " from " + APP.api_login_url);
-                  if(422===jqXHR.status && data) {
+                  if(jqXHR.status > 399 && jqXHR.status < 600 && data) {
                     // $( '.form__error', $form ).empty();
                     $errorDiv.empty().append( "<li>" + data.description);
                   }
@@ -540,7 +540,7 @@ $(document).on('ready', function() {
       break;
     }
     case 'home' : {
-      $('a.go-beyond-views-link').on('click', function(e){
+      $('a.trigger_iframe_overlay_video').on('click', function(e){
         e.preventDefault();
         var videoUrl = $(this).data('href');
         showOverlay({ type: 'iframe', href: videoUrl });
@@ -930,60 +930,15 @@ $(document).on('ready', function() {
     }
   });
 
-  (function(){
-    var $form = $("#newsletter-form");
-                // $inputs = $('#newsletter-form :input');
+  // (function(){
+  //   var $form = $("#newsletter-form");
+  //   // $inputs = $('#newsletter-form :input');
 
-            $form.submit(function (e) {
-                window.location = APP.asset_prefix + '/newsletter/subscribe/confirmation/';
-                // var $button = $form.find('.js-submit');
-                // var values = {};
-                // $inputs.each(function () {
-                //     if (this.name) values[this.name] = $(this).val();
-                // });
-                // console.log(values);
-                // $.ajax({
-                //     type: "POST",
-                //     url: APP.api_newsletter_subscribe_request_url,
-                //     crossDomain: true,
-                //     cache: false,
-                //     dataType: 'JSON',
-                //     timeout: 6000,
-                //     data: JSON.stringify(values),
-
-                //     success: function success(data) {
-                //         // cleaning the error message
-                //         $('.form__feedback', $form).empty();
-                //         $('.has-error').removeClass('has-error');
-
-                //         console.log(data);
-
-                //         if (!data.data.success) {
-
-                //             var $errorDiv = $('.form__error', $form);
-
-                //             $.each(data.data.errors, function (key, error) {
-                //                 $("input[name='" + key + "']", $form).addClass('has-error');
-                //                 // $( "input[name='" + key + "']", $form).after('<div class="form__feedback form__error">' + error + '</div>');
-                //                 // $errorDiv.append( error );
-                //             });
-                //         } else {
-
-                //                 // $button.val( data.message );
-
-                //                 if (data.data.redirect) window.location = APP.asset_prefix + data.data.redirect;
-                //             }
-                //     },
-
-                //     error: function error(jqXHR, textStatus, errorThrown) {
-                //         console.log("API error: " + textStatus + " - " + errorThrown.message);
-                //         $(".form__feedback", $form).empty().append("API error: " + textStatus + " - " + errorThrown.message);
-                //     }
-                // });
-
-                e.preventDefault();
-            });
-  })();
+  //   $form.submit(function (e) {
+  //       window.location = APP.asset_prefix + '/newsletter/subscribe/confirmation/';
+  //       e.preventDefault();
+  //   });
+  // })();
 
 });
 
