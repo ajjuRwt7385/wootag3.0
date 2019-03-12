@@ -186,7 +186,7 @@ header{
           font-weight: 500;
           text-decoration: none;
           margin-right:30px;
-          letter-spacing: 0.05em;
+          // letter-spacing: 0.05em;
           &:hover {
             color: $color_text_dark_gray;
           }
@@ -211,7 +211,7 @@ header{
       font-size:14px;
       font-weight: 500;
       text-decoration: none;
-      letter-spacing: 0.05em;
+      // letter-spacing: 0.05em;
       display: flex;
       i{
         line-height: 12px;
@@ -522,6 +522,50 @@ header{
     }
   }
 }
+.client-logo-dimension{
+  &.dbs{
+    height:26px;width:85px;
+  }
+  &.globe{
+    height:34px;width:89px;
+  }
+  &.unilever{
+    height:44px;width:40px;
+    &.marLeft{
+      margin-left: 20px
+    }
+  }
+  &.ford{
+    height:34px;width:87px;
+  }
+  &.nestle{
+    height:21px;width:76px;
+  }
+  &.groupm{
+    height:27px;width:94px;
+  }
+  &.phd{
+    height:33px;width:51px;
+  }
+  &.ipg{
+    height:23px;width:160px;
+  }
+  &.dentsu{
+    height:20px;width:95px;
+  }
+  &.visa{
+    height:21px;width:66px;
+  }
+  &.hsbc{
+    height:28px;width:104px;
+  }
+  &.ana{
+    height:25px;width:96px;
+  }
+  &.esteelauder{
+    height:22px;width:150px;
+  }
+}
 .agencies-logos{
   margin: 40px 0 20px;
   display: flex;
@@ -554,6 +598,9 @@ header{
     top:0;
     width:100%;
     height: 100%;
+    video{
+      object-fit: fill; position: absolute; width: 100%; height: 100%; top: 0px; left: 0px;
+    }
   }
   position: relative;
   display: flex;
@@ -1969,6 +2016,9 @@ Why Wootag---
         padding: 50px 50px 70px;
         box-shadow: 0px 16px 80px rgba(0, 0, 0, 0.3);
         border-color: transparent;
+        button[type=submit]{
+          margin:30px 0 0;
+        }
       }
     }
   }  
@@ -3227,7 +3277,7 @@ Why Wootag---
 
 .team {
   .wt-button {
-    width: 274px;
+    width: 200px;
     margin-top:20px;
   }
 }
