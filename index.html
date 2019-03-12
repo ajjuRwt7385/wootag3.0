@@ -14,10 +14,10 @@ pName: "home"
     <div class="container">
       <!-- Go beyond views -->
       <div class="row row-centered row__padTB100 row__padT120 zIndexOne">
-        <div class="col-sm-12 col-md-8">            
+        <div class="col-sm-12 col-md-8 mobile-text-center">            
           <h1 class="wt-title wt-title__large" data-aos="fade-up">Go beyond views</h1>
           <p class="large" data-aos="fade-up">Harnessing the power of human curiosity with simple, immersive interactions, directly within your video.</p>
-          <div class="play-button-with-text" data-aos="fade-up">
+          <div class="play-button-with-text mobile-ele-center" data-aos="fade-up">
             <a href="#" class="go-beyond-views-link trigger_iframe_overlay_video" data-href="//www.wootag.com/videos/share/v2/473ABC-9612-AEEBFC17D3-9BDE-B942?autoplay=1"><div class="button-circular"><i class="material-icons">play_arrow</i></div><span>WATCH VIDEO</span></a>
           </div>
         </div>
@@ -25,29 +25,29 @@ pName: "home"
       <!-- Client Logos slider -->
       <div class="row row-centered">
         <div class="col-sm-12 col-md-8">
-          <section class="slider-client-logos">
+          <div class="slider-client-logos">
             <div>
-              <img src="{{ site.baseurl }}/assets/images/client_logos/home/dbs.svg" style="height:26px;width:85px;">
+              <img src="{{ site.baseurl }}/assets/images/client_logos/home/dbs.svg" style="height:26px;width:85px;" alt="wootag-client-dbs">
             </div>
             <div>
-              <img src="{{ site.baseurl }}/assets/images/client_logos/home/globe.svg" style="height:34px;width:89px;">
+              <img src="{{ site.baseurl }}/assets/images/client_logos/home/globe.svg" style="height:34px;width:89px;" alt="wootag-client-globe">
             </div>
             <div>
-              <img src="{{ site.baseurl }}/assets/images/client_logos/home/unilever.svg" style="height:44px;width:40px;">
+              <img src="{{ site.baseurl }}/assets/images/client_logos/home/unilever.svg" style="height:44px;width:40px;" alt="wootag-client-unilever">
             </div>
             <div>
-              <img src="{{ site.baseurl }}/assets/images/client_logos/home/ford.svg" style="height:34px;width:87px;">
+              <img src="{{ site.baseurl }}/assets/images/client_logos/home/ford.svg" style="height:34px;width:87px;" alt="wootag-client-ford">
             </div>
             <div>
-              <img src="{{ site.baseurl }}/assets/images/client_logos/home/nestle.svg" style="height:21px;width:76px;">
+              <img src="{{ site.baseurl }}/assets/images/client_logos/home/nestle.svg" style="height:21px;width:76px;" alt="wootag-client-nestle">
             </div>
             <div>
-              <img src="{{ site.baseurl }}/assets/images/client_logos/home/groupm.svg" style="height:27px;width:94px;">
+              <img src="{{ site.baseurl }}/assets/images/client_logos/home/groupm.svg" style="height:27px;width:94px;" alt="wootag-client-groupm">
             </div>
             <div>
-              <img src="{{ site.baseurl }}/assets/images/client_logos/agencies/phd.svg" style="height:33px;width:51px;">
+              <img src="{{ site.baseurl }}/assets/images/client_logos/agencies/phd.svg" style="height:33px;width:51px;" alt="wootag-client-phd">
             </div>          
-          </section>
+          </div>
         </div>
       </div>
       <!-- Main home visual/video -->
@@ -61,7 +61,7 @@ pName: "home"
             </div>
             <div class="featured-player">
               <img src="{{ site.baseurl }}/assets/images/16x8.jpg" alt="featured"/>
-              <div class="video-demo"><video playsinline defaultMuted muted autoplay style="object-fit: fill; position: absolute; width: 100%; height: 100%; top: 0px; left: 0px;" preload="true" id="home-demo-video"><source src="{{ site.baseurl }}/assets/images/wootag-home-demo-video.mp4" type="video/mp4"></video></div>
+              <div class="video-demo"><video playsinline muted style="object-fit: fill; position: absolute; width: 100%; height: 100%; top: 0px; left: 0px;" preload id="home-demo-video"><source src="{{ site.baseurl }}/assets/images/wootag-home-demo-video.mp4" type="video/mp4"></video></div>
                 <div class="video-overlay home-demo">
                   <div class="timeline">
                     <div class="progressbar">
@@ -159,11 +159,14 @@ pName: "home"
       </div>
       <!-- wootag platform -->
       <div class="row row-centered row__padTB100 zIndexOne">
-        <div class="col-sm-12 col-md-8">
+        <div class="col-sm-12 col-md-8 mobile-text-center">
           <div class="section-title">TOUCHPOINTS</div>
           <h2 class="section-subtitle">Interactivity with Impact</h2>
           <p>Imagine if your viewers could explore your video, and step right into the world of your products? Revolutionise their experience with Wootag. Give customers the power to interact with your brand within videos – without needing to go anywhere else.</p>
-          <div><a href="{{ site.baseurl }}/platform-tour/" class="link"><div class="wt-button button--ghost">LEARN MORE</div></a></div>
+          <div class="touchpoints">
+            <a href="{{ site.baseurl }}/signup/" class="link"><div class="wt-button ">Sign up free</div></a>
+            <a href="{{ site.baseurl }}/platform-tour/" class="link"><div class="wt-button button--ghost">Learn More</div></a>
+          </div>
         </div>
       </div>          
     </div>
@@ -175,7 +178,7 @@ pName: "home"
       <div class="container">
         <div class="row row-centered">
           <div class="col-sm-12 col-md-8">
-            <div class="personas-content">
+            <div class="personas-content mobile-text-center">
                 <div class="section-title">SOLUTIONS</div>
                 <h2 class="section-subtitle">One platform for all your video marketing</h2>
                 <p>Turn your viewers into customers with Wootag interactive videos. Our revolutionary video platform is your one-stop shop to create optimised videos for multiple channels – so you can reach your audience no matter where they are.</p>
@@ -229,9 +232,9 @@ pName: "home"
 <div class="container-fluid">        
   <div class="row row__padTB100 section-sitback_interact">
     <div class="container">
-      <div class="row row-centered">
+      <div class="row row-centered mobile-text-center">
         <div class="col-sm-12 col-md-8">
-          <h2 class="wt-title wt-title__large">Hear Our Stories</h2>
+          <h2 class="wt-title section-subtitle">Hear Our Stories</h2>
           <p>See how Wootag interactive videos are changing the way businesses use performance video to engage with their customers – across industry, retail and commerce.</p>
         </div>
         <div class="col-sm-12">
@@ -244,9 +247,9 @@ pName: "home"
               </div>
               <div class="col-sm-12 col-md-4"> <!-- visible-md-block visible-lg-block -->
                 <div class="sitback-content">
-                  <h3>WTA Finals</h3>
+                  <h3 class="mobile-ele-center">WTA Finals</h3>
                   <div class="sitback-comment">
-                    <div class="comment-text">“Wootag is how all video marketing should be. The Wootag platform brilliantly infuses video with the opportunity to interact directly with the viewer, thus moving the audience from passive to active engagement.” — </div>
+                    <div class="comment-text">“Wootag is how all video marketing should be. The Wootag platform brilliantly infuses video with the opportunity to interact directly with the viewer, thus moving the audience from passive to active engagement.”</div>
                     <p class="comment-by">Yang Minn, Senior Director of Marketing, Tennis – Asia, Lagardère Sports</p>
                   </div>
                   <div class="slider-buttons">
@@ -268,9 +271,9 @@ pName: "home"
               </div>
               <div class="col-sm-12 col-md-4">
                 <div class="sitback-content">
-                  <h3>Globe Telecom</h3>
+                  <h3 class="mobile-ele-center">Globe Telecom</h3>
                   <div class="sitback-comment">
-                    <div class="comment-text">“Engagement-wise, Wootagged content comprised of the right interaction elements gave us better traction with conventional, static online posts.” — </div>
+                    <div class="comment-text">“Engagement-wise, Wootagged content comprised of the right interaction elements gave us better traction with conventional, static online posts.”</div>
                     <p class="comment-by">Glenn Estrella, Sr Vice President Marketing, Globe Digital Ventures</p>
                   </div>
                   <div class="slider-buttons">

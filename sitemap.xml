@@ -1,18 +1,92 @@
----
-sitemap:
-    priority: 1.0
-    changefreq: weekly
----
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  {% for page in site.pages %}
-    {% if page.sitemap != null and page.sitemap != empty %}
-    <url>
-      <loc>{{ site.url }}{{ page.url }}</loc>
-      <changefreq>{{ page.sitemap.changefreq }}</changefreq>
-      <priority>{{ page.sitemap.priority }}</priority>
-    </url>
-    {% endif %}
-  {% endfor %}
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
+<url>
+  <loc>https://www.wootag.com/</loc>
+  <lastmod>2019-02-28T09:47:14+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://www.wootag.com/platform-tour/</loc>
+  <lastmod>2019-02-28T09:47:14+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.wootag.com/solutions/business/</loc>
+  <lastmod>2019-02-28T09:47:14+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.wootag.com/solutions/agencies/</loc>
+  <lastmod>2019-02-28T09:47:14+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.wootag.com/solutions/enterprise/</loc>
+  <lastmod>2019-02-28T09:47:14+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.wootag.com/explore/</loc>
+  <lastmod>2019-02-28T09:47:14+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.wootag.com/pricing/</loc>
+  <lastmod>2019-02-28T09:47:14+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.wootag.com/signin/</loc>
+  <lastmod>2019-02-28T09:47:14+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.wootag.com/signup/</loc>
+  <lastmod>2019-02-28T09:47:14+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.wootag.com/about/</loc>
+  <lastmod>2019-02-28T09:47:14+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.wootag.com/terms/</loc>
+  <lastmod>2019-02-28T09:47:14+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.wootag.com/privacy-policy/</loc>
+  <lastmod>2019-02-28T09:47:14+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.wootag.com/videos/share/v2/473ABC-9612-AEEBC53598-2FB4-39F1</loc>
+  <lastmod>2019-03-04T06:53:47+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.wootag.com/videos/embed/v2/483627-DCE8-5B9B6D7E26-240A-3B08</loc>
+  <lastmod>2019-03-04T06:53:47+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.wootag.com/videos/embed/v2/23C4E2-391C-A833108996-77EC-2C28</loc>
+  <lastmod>2019-03-04T06:53:47+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.wootag.com/forgot-password/</loc>
+  <lastmod>2019-02-28T09:47:14+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+
 
 </urlset>

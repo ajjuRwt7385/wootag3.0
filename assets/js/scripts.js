@@ -73,6 +73,15 @@ function urlParam(variable){
 
 var iOS = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
 //---
+$(window).resize(function(){
+  if(window.innerWidth < 992) {
+    $('body').addClass('mobile').removeClass('desktop');
+    $('.wt-nav-signup').appendTo('.wt-navbar-left');
+  } else {
+    $('body').addClass('desktop').removeClass('mobile');    
+    $('.wt-nav-signup').appendTo('.wt-navbar-right');
+  }
+}).resize();
 $(document).on('ready', function() {
   // Responsive mobile navigation toggle---
   $('.mobile-menu-btn').on('click', function(){
@@ -82,27 +91,78 @@ $(document).on('ready', function() {
       if ($('header').hasClass('subnav-active')) {
         $('header').removeClass('subnav-active');
       }
+      $('.wt-navbar-items').find('>li').removeClass('hide');
     }else {
       $(this).addClass('isOpen');
       $('header').addClass('mobile-active');
     }
   });
-  $('#nav-why-wootag').on('click', function(e){
-    e.preventDefault();
-    if($('.navbar-dropdown').hasClass('active')) {
-      $('.navbar-dropdown').removeClass('active');
-      $(this).find('i').text('arrow_drop_down');
-      $('header').removeClass('subnav-active');
-    }else {
-      $('.navbar-dropdown').addClass('active');
-      $(this).find('i').text('arrow_drop_up');
-      $('header').addClass('subnav-active');
+
+  // Accordion footer---
+  $('.accordion-title').on('click', function(){
+    if($('body').hasClass('mobile')){
+      if($(this).next('ul').hasClass('showIt')) {
+        $(this).next('ul').removeClass('showIt');
+        $(this).find('i').text('arrow_drop_down');
+      }else {
+        $(this).next('ul').addClass('showIt');        
+        $(this).find('i').text('arrow_drop_up');
+      }
+      $(this).next('ul').slideToggle(100);
     }
-    $('.navbar-dropdown').slideToggle(200);
   });
-  $('header .overlay-subnav').on('click', function(e){
-    $('#nav-why-wootag').click();
+  /**
+   * SOLUTIONS SUBNAV STARTS---
+   */
+  
+  function showSubnav() {
+    // e.preventDefault();
+    if(!$('.navbar-dropdown').hasClass('active') && $(this).closest('body').hasClass('desktop')) { // only for desktop devices---
+      $('.navbar-dropdown').addClass('active');
+      $('header').addClass('subnav-active');
+      $('.navbar-dropdown').slideToggle(200);
+    }   
+  }
+  // hide subanav if active---
+  function hideSunNav() {
+      if($('.navbar-dropdown').hasClass('active')) {
+        $('.navbar-dropdown').removeClass('active');
+        $('header').removeClass('subnav-active');
+        $('.navbar-dropdown').slideToggle(200);
+      }
+  }
+  // Solutions/WhyWootag nav hover event---
+  if($('body').hasClass('desktop')){
+    $('#nav-why-wootag').mouseenter(showSubnav);
+
+    $('.wt-navbar-items>li>a:not(#nav-why-wootag)').mouseenter(hideSunNav);
+  }
+  // hide on click of nav if active---
+  $('#nav-why-wootag').on('click', function(e) {
+    e.preventDefault();
+    if ($(this).closest('body').hasClass('desktop')) { // if desktop, hide subnav on clicking the navitem---      
+      if($('.navbar-dropdown').hasClass('active')){
+        showSubnav();
+        // $('.navbar-dropdown').slideToggle(200);ß
+      } else {
+        hideSunNav();
+      }
+    } else if ($(this).closest('body').hasClass('mobile')) { // if mobile, toggle subnav and all other nav items visibility---
+      if($('header').hasClass('subnav-active')){
+        $('header').removeClass('subnav-active');
+        $(this).closest('li').siblings('li').removeClass('hide');
+      }else {
+        $('header').addClass('subnav-active');
+        $(this).closest('li').siblings('li').addClass('hide');
+      }      
+    }
   });
+  // hide when move out of the subnav area to the overlay---
+  $('header .overlay-subnav').mouseenter(hideSunNav);
+  /**
+   * SOLUTIONS SUBNAV ENDS---
+   */
+
   // Logo slider for home and explore page---
   $('.slider-client-logos').slick({
     autoplay: false,
@@ -231,7 +291,7 @@ $(document).on('ready', function() {
               $('.form__feedback', $form).empty();
               $('.has-error').removeClass('has-error');
     
-              console.log(data);
+              // console.log(data);
     
               if (!data.success) {
                 $form.find('.thanks-msg').addClass('hide');
@@ -252,7 +312,30 @@ $(document).on('ready', function() {
       });
     });
   }
-  
+  // to check if an element is in view---
+  function isScrolledIntoView(elem)
+  {
+    var docViewTop = $(window).scrollTop();
+    var docViewBottom = docViewTop + $(window).height();
+
+    var elemTop = $(elem).offset().top;
+    var elemBottom = elemTop + $(elem).height();
+
+    return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
+  }
+  var DEMO_PLAYER_IN_VIEW = false;
+  var notPlayedEver = true;
+  function checkDemoPlayerStatus() {
+    stickyNavFunc();
+    DEMO_PLAYER_IN_VIEW = isScrolledIntoView('.featured-player');
+    console.log('DEMO_PLAYER_IN_VIEW', DEMO_PLAYER_IN_VIEW);
+    if (DEMO_PLAYER_IN_VIEW && notPlayedEver) {
+      clearTimeout(theTimeout);
+      playDemoPlayerAnimation();
+      
+      notPlayedEver = false;
+    }
+  }
   // Page wise events---
   var currentPage = $('body').data('page');
   console.log('currentPage', currentPage);
@@ -268,7 +351,7 @@ $(document).on('ready', function() {
               });
 
               var $errorDiv = $( '.form__error', $form );
-              console.log(values);
+              // console.log(values);
               var loginRequest = $.ajax({
                   type: "POST",
                   url: APP.api_login_url,
@@ -343,7 +426,7 @@ $(document).on('ready', function() {
         var $errorDiv = $( '.form__error', $form );
         // cleaning the error message
         $errorDiv.empty();
-        console.log(values);
+        // console.log(values);
         var signupRequest = $.ajax({
             type: "POST",
             url: APP.api_registration_url,
@@ -357,7 +440,7 @@ $(document).on('ready', function() {
 
           signupRequest.done( function( data ) {
 
-              console.log(data);
+              // console.log(data);
               if ( data.data.description) {
                   
                   $.each( data.code, function( key, error ) {
@@ -394,6 +477,17 @@ $(document).on('ready', function() {
           e.preventDefault();
 
       });
+      // Slider signup left sidebar---
+      $('.slider-signup').slick({
+        autoplay: true,
+        infinite: true,
+        arrows: false,
+        autoplaySpeed: 5000,
+        dots: true,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+      });
+
       break;
     }
     case 'explore': {
@@ -422,19 +516,6 @@ $(document).on('ready', function() {
           processCategories(data);
         }
       });
-
-      // count animation---
-      // $('.count').each(function () {
-      //   $(this).prop('Counter',0).animate({
-      //       Counter: $(this).text()
-      //   }, {
-      //       duration: 1000,
-      //       easing: 'swing',
-      //       step: function (now) {
-      //           $(this).text(Math.ceil(now));
-      //       }
-      //   });
-      // });
 
       function setViewVideoCount(options) {
         $('.view_count').text(options.view_count);
@@ -501,7 +582,7 @@ $(document).on('ready', function() {
               var hostName = item.wootag_url && extractHostname(item.wootag_url);
               var videoUrl = hostName && '//'+hostName+'/embed/'+item.playback_id;
               if(idx % 8 === 0) {
-                $('#explore_video_items').append('<div class="row hide" data-rowId="'+ (idx / 8) +'" data-aos="fade-in"></div>');
+                $('#explore_video_items').append('<div class="row hide no-gutter" data-rowId="'+ (idx / 8) +'" data-aos="fade-in"></div>');
               }
               var fadeEffect = idx % 2 === 0 ? 'fade-right' : 'fade-left';
               $('#explore_video_items > .row:last-child').append('<div class="col-sm-12 col-md-6 video_item" data-aos="'+ fadeEffect +'"><a href="#" data-href="'+videoUrl+'" data-type="overlay-iframe"><div class="img"><img src="'+item.img+'" alt="'+item.title+'" /><div class="overlay"><div class="button-circular button--pulsate"><i class="material-icons">play_arrow</i></div><div class="detail"><div class="title">'+item.title+'</div><div class="category">'+fomratSecondsToMMSS(item.video_duration) +' | '+ item.category_name+'</div></div></div></div></a></div>');
@@ -567,13 +648,14 @@ $(document).on('ready', function() {
       }
 
       // starting demo animation---
+      var theTimeout;
       function playDemoPlayerAnimation() {
         $('#home-demo-video').get(0).currentTime = 0;
         $('#home-demo-video').get(0).play();
         
 
-        if(!$('.home-demo .tag-preview').hasClass('disapper')){
-          $('.home-demo .tag-preview').addClass('disapper');
+        if(!$('.home-demo .tag-preview').hasClass('disappear')){
+          $('.home-demo .tag-preview').addClass('disappear');
         }
         $('.home-demo .click-simulate, .home-demo .details').removeClass('active');
         $('.home-fake-player-details >.detail').removeClass('appear disappear-right');
@@ -581,9 +663,9 @@ $(document).on('ready', function() {
         $('.home-demo .progress').addClass('start');
 
         clearTimeout(theTimeout);
-        var theTimeout = setTimeout(function(){
+        theTimeout = setTimeout(function(){
           // tag preview appears---
-          $('.home-demo .tag-preview').removeClass('disapper');
+          $('.home-demo .tag-preview').removeClass('disappear');
           
           // tag click simulation delay added through css---
           $('.home-demo .click-simulate').addClass('active');
@@ -627,11 +709,15 @@ $(document).on('ready', function() {
         
       }
       // initializing demo animation---
-      document.getElementById('home-demo-video').addEventListener('loadeddata', function() {
-        // Video is loaded and can be played
-        playDemoPlayerAnimation();
-      }, false);
-      playDemoPlayerAnimation();
+      // document.getElementById('home-demo-video').addEventListener('loadeddata', function() {
+      //   // Video is loaded and can be played
+      //   playDemoPlayerAnimation();
+      // }, false);
+      // playDemoPlayerAnimation();
+
+      window.onscroll = checkDemoPlayerStatus;
+      // initial check if the player is already in view---
+      $("#home-demo-video").on("loadeddata", checkDemoPlayerStatus);
       
       // removing the pulsating button class from persona cards as it forces two clicks on link to open in iOS devices---
       if(iOS) {
@@ -763,8 +849,8 @@ $(document).on('ready', function() {
         // $('#platform-demo-video').get(0).play();
         
 
-        if(!$('.platform-demo .tag-preview').hasClass('disapper')){
-          $('.platform-demo .tag-preview').addClass('disapper');
+        if(!$('.platform-demo .tag-preview').hasClass('disappear')){
+          $('.platform-demo .tag-preview').addClass('disappear');
         }
         $('.platform-demo .click-simulate, .platform-demo .details').removeClass('active');
         $('.platform-fake-player-details >.detail').removeClass('appear disappear-right');
@@ -774,7 +860,7 @@ $(document).on('ready', function() {
         clearTimeout(theTimeout);
         var theTimeout = setTimeout(function(){          
           // tag preview appears---
-          $('.platform-demo .tag-preview').removeClass('disapper');
+          $('.platform-demo .tag-preview').removeClass('disappear');
           
           // tag click simulation delay added through css---
           $('.platform-demo .click-simulate').addClass('active');
@@ -802,8 +888,10 @@ $(document).on('ready', function() {
         
       }
       // initializing demo animation---
-      playDemoPlayerAnimation();
-
+      // playDemoPlayerAnimation();
+      window.onscroll = checkDemoPlayerStatus;
+      // initial check if the player is already in view---
+      $("#platform-demo-video").on("loadeddata", checkDemoPlayerStatus);
       break;
     }
     case 'pricing': {

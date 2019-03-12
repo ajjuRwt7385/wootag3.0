@@ -5,6 +5,7 @@ body {
   -webkit-font-smoothing: antialiased;
   line-height: 1em;
   // transform: translateZ(0);  
+  position: relative;
   margin: 0;
   padding: 0;
   &.wt-theme-dark{
@@ -38,11 +39,11 @@ body {
   display: flex;
   flex-wrap: wrap;
   font-family: 'Rubik', sans-serif;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
   height: 48px;
   justify-content: center;
-  letter-spacing: 0.1em;
+  // letter-spacing: 0.1em;
   padding:0 40px;
   transition: all 0.2s ease;
   &.wt-button--large{
@@ -138,22 +139,25 @@ button:focus{
   outline: none !important;
   box-shadow: none !important;
 }
-.play-button-with-text a{
-  align-items: center;
-  display: flex;
-  float: left;  
-  text-decoration: none;
-  > span{
-    color: $color_wootag_blue;
-    font-size: 12px;
-    font-weight: 500;
-    margin-left: 10px;
-    letter-spacing: 0.05em;
-  }
-  &:hover {
-    .button-circular{
-      background-color: $color_wootag_blue;
-      color: $color_text_white;
+.play-button-with-text {
+  margin-top:30px;
+  a{
+    align-items: center;
+    display: flex;
+    float: left;  
+    text-decoration: none;
+    > span{
+      color: $color_wootag_blue;
+      font-size: 12px;
+      font-weight: 500;
+      margin-left: 10px;
+      letter-spacing: 0.05em;
+    }
+    &:hover {
+      .button-circular{
+        background-color: $color_wootag_blue;
+        color: $color_text_white;
+      }
     }
   }
 }
@@ -238,6 +242,9 @@ a:hover .button--pulsate,
   font-size: 32px;
   line-height: 1.2em;
   margin-bottom: 24px;
+  &.no-margin{
+    margin: 0;
+  }
 }
 
 p{
@@ -395,22 +402,68 @@ div.hr{
 .marB0 {
   margin-bottom: 0 !important;
 }
+.no-margin{
+  margin: 0;
+}
 .row{
   outline: none;
 }
+@media(max-width:767px){
+  .mobile-text-center{
+    text-align: center;
+  }
+  .mobile-ele-center{
+    margin-left: auto;
+    margin-right: auto;
+    display: inline-block;
+  }
+  .container,
+  .container-fluid,
+  div[class*='col-']{
+    padding-left:25px;
+    padding-right:25px;
+  }
+  .no-gutter{
+    div[class*='col-']{
+      padding-left:0px;
+      padding-right:0px;
+    }
+  }
+  .row{
+    margin-right: -25px;
+    margin-left: -25px;
+  }
+  div.noHoriPaddingOnMobile{
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  .mobile-margin-left{
+    margin-left: 25px;
+  }
+  .mobile-margin-right{
+    margin-left: -40px;
+  }
+}
 @media (min-width: 992px) {
+  // .mobile-text-center {
+  //   text-align: left;
+  // }
+  // .mobile-ele-center{
+  //   display: block;
+  //   margin-left: inherit;
+  // }
   .wt-title__large{
     font-size: 76px;
     margin: 0 0 30px;
   }
   .section-subtitle{
-    font-size: 54px;
+    font-size: 52px;
     line-height: 70px;
     margin-bottom: 36px;
     display: inline-block;
   }
   p{
-    font-size: 18px; 
+    font-size: 20px; 
     &:last-of-type{
       margin-bottom: 30px;
     }   

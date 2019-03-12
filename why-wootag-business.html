@@ -11,46 +11,9 @@ pName: "why_wootag_business"
       <div class="container">
         <!-- title top section -->
         <div class="row row-centered row__padT120 zIndexOne">
-          <div class="col-sm-12 col-md-8">            
+          <div class="col-sm-12 col-md-8 mobile-text-center">            
             <h1 class="wt-title wt-title__large" data-aos="fade-up">Business Owners</h1>
             <p data-aos="fade-up">Connect with your audience on a whole new level. Wootag’s video marketing platform allow sign-ups from directly within your video, powering your lead generation and revealing what truly drives your customers.</p>
-            <!-- Client Logos slider -->
-            <!-- <div class="row">
-              <div class="col-sm-12">
-                <section class="slider-client-logos explore-logos">
-                  <div>
-                    <img src="{{ site.baseurl }}/assets/images/client_logos/visa.svg" style="height:21px;width:66px;">
-                  </div>
-                  <div>
-                    <img src="{{ site.baseurl }}/assets/images/client_logos/paypal.svg" style="height:24px;width:88px;">
-                  </div>
-                  <div>
-                    <img src="{{ site.baseurl }}/assets/images/client_logos/coke.svg" style="height:29px;width:88px;">
-                  </div>
-                  <div>
-                    <img src="{{ site.baseurl }}/assets/images/client_logos/hyundai.svg" style="height:24px;width:88px;">
-                  </div>
-                  <div>
-                    <img src="{{ site.baseurl }}/assets/images/client_logos/nestle.svg" style="height:24px;width:88px;">
-                  </div>
-                  <div>
-                    <img src="{{ site.baseurl }}/assets/images/client_logos/groupm.svg" style="height:24px;width:88px;">
-                  </div>
-                  <div>
-                    <img src="{{ site.baseurl }}/assets/images/client_logos/visa.svg" style="height:21px;width:66px;">
-                  </div>
-                  <div>
-                    <img src="{{ site.baseurl }}/assets/images/client_logos/paypal.svg" style="height:24px;width:88px;">
-                  </div>
-                  <div>
-                    <img src="{{ site.baseurl }}/assets/images/client_logos/coke.svg" style="height:29px;width:88px;">
-                  </div>
-                  <div>
-                    <img src="{{ site.baseurl }}/assets/images/client_logos/hyundai.svg" style="height:24px;width:88px;">
-                  </div>                
-                </section>
-              </div>
-            </div> -->
           </div>
         </div>                   
       </div>
@@ -62,8 +25,33 @@ pName: "why_wootag_business"
     <div class="row row__padB100">
       <div class="container">
         <div class="row row-centered zIndexOne">
-          <div class="col-sm-12 col-md-10 why-wootag-hero">
-            <img src="{{ site.baseurl }}/assets/images/why_wootag/business.jpg" alt="Business Owners" />
+          <div class="col-sm-12 why-wootag-hero enterprise">
+            <div class="img"><img src="{{ site.baseurl }}/assets/images/why_wootag/business.jpg" alt="Business Owners" /></div>
+            <div class="contact-form whyEnterprise">
+              <h3 class="wt-title mobile-text-center">Contact us today to find out how Wootag can help you</h3>
+              <form role="form" id="contact-form">
+                <div class="form__feedback form__error"></div>
+                <div class="form__feedback form__msg"></div>
+                <div class="form-group">
+                  <label for="contact_name">NAME</label>
+                  <input type="text" required class="form-control" id="contact_name" name="name" placeholder="Your Full Name">
+                </div>
+                <div class="form-group">
+                  <label for="contact_email">WORK EMAIL</label>
+                  <input type="email" required class="form-control" id="contact_email" name="email" placeholder="you@example.com">
+                </div>
+                <div class="form-group">
+                  <label for="contact_phone">PHONE NUMBER</label>
+                  <input type="text" required class="form-control" id="contact_phone" name="phone" placeholder="Your Contact Number">
+                </div>
+                <div class="form-group">
+                  <label for="contact_company">WEBSITE / COMPANY</label>
+                  <input type="text" class="form-control" id="contact_company" name="company" placeholder="Your Company Name (optional)">
+                </div>
+                <button type="submit" class="wt-button js-submit">SUBMIT</button>
+                <div class="thanks-msg hide"><h1 class="wt-title"><div class="loader"><div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div></div></h1></div>
+              </form>
+            </div>
           </div>
           <div class="col-sm-12 col-md-8 above-features-title">            
             <h2 class="section-subtitle">Solutions That Work</h2>
@@ -74,34 +62,42 @@ pName: "why_wootag_business"
             <div class="row why-wootag-features">
               <div class="col-xs-12">
                 <div class="row">
-                  <div class="col-xs-12 col-sm-6 feature-section">
+                  <div class="col-xs-12 feature-section">
                     <div>
                       <div class="img"><img src="{{ site.baseurl }}/assets/images/why_wootag/icons/icons8-multiple-devices.svg" alt="responsive player with your seo" /></div>
-                      <h3>Responsive player that<br/>serves your business</h3>
-                      <p>Ditch external video players that serve themselves – Wootag video solution enables embed players on your site to serve only your business goals and your SEO.</p>
+                      <div class="text">
+                        <h3>Responsive player that serves your business</h3>
+                        <p>Ditch external video players that serve themselves – Wootag video solution enables embed players on your site to serve only your business goals and your SEO.</p>
+                      </div>
                     </div>
                   </div>            
-                  <div class="col-xs-12 col-sm-6 feature-section">
+                  <div class="col-xs-12 feature-section">
                     <div>
                       <div class="img"><img src="{{ site.baseurl }}/assets/images/why_wootag/icons/icons8-queue.svg" alt="responsive player with your seo" /></div>
-                      <h3>Power your<br/>leads</h3>
-                      <p>Who needs unnecessary redirects? Wootag gives you the tools to expand your customer database by getting contact details and signups from directly within your video.</p>
+                      <div class="text">
+                        <h3>Power your leads</h3>
+                        <p>Who needs unnecessary redirects? Wootag gives you the tools to expand your customer database by getting contact details and signups from directly within your video.</p>
+                      </div>
                     </div>
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-xs-12 col-sm-6 feature-section">
+                  <div class="col-xs-12 feature-section">
                     <div>
                       <div class="img"><img src="{{ site.baseurl }}/assets/images/why_wootag/icons/icons8-statistics.svg" alt="responsive player with your seo" /></div>
-                      <h3>Measure what<br/>matters</h3>
-                      <p>Now you can measure more than just views. Learn who’s interacting with your products and what drives sales for your business with Wootag’s in-depth insights.</p>
+                      <div class="text">
+                        <h3>Measure what matters</h3>
+                        <p>Now you can measure more than just views. Learn who’s interacting with your products and what drives sales for your business with Wootag’s in-depth insights.</p>
+                      </div>
                     </div>
                   </div>
-                  <div class="col-xs-12 col-sm-6 feature-section">
+                  <div class="col-xs-12 feature-section">
                     <div>
                       <div class="img"><img src="{{ site.baseurl }}/assets/images/why_wootag/icons/icons8-upgrade.svg" alt="responsive player with your seo" /></div>
-                      <h3>Upgrade as<br/>you go</h3>
-                      <p>Tired of hefty subscriptions for features you don’t use? Enter Wootag. Customise your platform by purchasing additional features only as and when you need them.</p>
+                      <div class="text">
+                        <h3>Upgrade as you go</h3>
+                        <p>Tired of hefty subscriptions for features you don’t use? Enter Wootag. Customise your platform by purchasing additional features only as and when you need them.</p>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -129,8 +125,8 @@ pName: "why_wootag_business"
                 <div class="col-sm-12 col-md-4"> <!-- visible-md-block visible-lg-block -->
                   <div class="sitback-content">
                     <!-- <h3>Coca-Cola:<br/> Taste The Feeling</h3> -->
-                    <div class="sitback-comment noHeader">
-                      <div class="comment-text">“Wootag helped generate leads and increase traffic to our online store. We are confident that our audience engage way better when they see a relevant product and can interact with it in our video.” — </div>
+                    <div class="sitback-comment noHeader mobile-text-center">
+                      <div class="comment-text">“Wootag helped generate leads and increase traffic to our online store. We are confident that our audience engage way better when they see a relevant product and can interact with it in our video.”</div>
                       <p class="comment-by">Angg Rain</p>
                     </div>                        
                   </div>

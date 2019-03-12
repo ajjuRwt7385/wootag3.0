@@ -16,29 +16,85 @@ pName: "signin"
   <div class="row">
     <div class="container">
       <!-- Login Form -->
-      <div class="row row-centered zIndexOne">
-        <div class="col-sm-12 col-md-6 row__padTB100">       
-          <div class="wt-navbar-logo">
+      <div class="row zIndexOne">
+        <div class="col-sm-12 col-md-6 row__padTB100 mobile-text-center">
+          <div class="wt-navbar-logo mobile-ele-center">
             <a class="wt-navbar-brand" href="{{ site.baseurl }}/"></a>
-          </div>     
-          <h1 class="wt-title wt-title__large">Welcome Back</h1>
+          </div>
+          <h1 class="wt-title section-subtitle no-margin">Sign in<br/>to wootag</h1>
           <form id="login-form" class="wt-form">
             <ul class="form__error"></ul>
             <div class="form-group">
-              <div class="signin-label-aligner"><label for="email">EMAIL ADDRESS</label></div>
-              <input type="email" required class="form-control" id="email" placeholder="you@example.com" name="email">
+              <div class="signin-label-aligner">
+                <label for="email">EMAIL</label>
+              </div>
+              <input
+                type="email"
+                required
+                class="form-control"
+                id="email"
+                placeholder="enter your email address"
+                name="email"
+              />
             </div>
             <div class="form-group">
-              <div class="signin-label-aligner"><label for="password">PASSWORD</label><a href="{{ site.baseurl }}/forgot-password/" class="link-wt-blue">Forgot Password?</a></div>
-              <input type="password" required class="form-control" id="password" placeholder="Enter your password" name="password">
-            </div>                  
-            <button type="submit" class="button wt-button">LOGIN</button>
-            <div class="no-account">Don't have an account? <a href="{{ site.baseurl }}/signup/" class="link-wt-blue">Try Wootag for Free</a></div>
-          </form>                
+              <div class="signin-label-aligner">
+                <label for="password">PASSWORD</label
+                ><a
+                  href="{{ site.baseurl }}/forgot-password/"
+                  class="link-wt-blue"
+                  >Forgot Password?</a
+                >
+              </div>
+              <input
+                type="password"
+                required
+                class="form-control"
+                id="password"
+                placeholder="enter your password"
+                name="password"
+              />
+            </div>
+            <button type="submit" class="button wt-button">Sign in</button>
+            <div class="no-account">
+              Don't have an account?
+              <a href="{{ site.baseurl }}/signup/" class="link-wt-blue"
+                >Try Wootag for Free</a
+              >
+            </div>
+          </form>
         </div>
         <!-- <div class="col-sm-12 col-md-6">
           <div class="bg-gray"></div>
         </div> -->
+      </div>
+      <div class="sticky-section to-right">
+        <ul>
+          <li>
+            <div class="title">
+              5 tips how to boost your video marketing performance like a pro
+            </div>
+            <a class="link" href="#"
+              >Learn more <i class="material-icons">arrow_forward</i></a
+            >
+          </li>
+          <li>
+            <div class="title">
+              Best interactive video executions this month
+            </div>
+            <a class="link" href="#"
+              >Learn more <i class="material-icons">arrow_forward</i></a
+            >
+          </li>
+          <li>
+            <div class="title">
+              Learn how you can create shoppable videos in minutes
+            </div>
+            <a class="link" href="#"
+              >Learn more <i class="material-icons">arrow_forward</i></a
+            >
+          </li>
+        </ul>
       </div>
     </div>
   </div>

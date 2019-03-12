@@ -13,38 +13,175 @@ pName: "signup"
 ---
 
 <div class="container-fluid sign-in-up-container">
-  <div class="row">
-    <div class="container">
-      <!-- Signup Form -->
-      <div class="row row-centered zIndexOne">
-        <div class="col-sm-12 col-md-6 row__padTB100">   
-          <div class="wt-navbar-logo">
-            <a class="wt-navbar-brand" href="{{ site.baseurl }}/"></a>
-          </div>              
-          <h1 class="wt-title wt-title__large">Create your free account</h1>
-          <form id="signup-form" class="wt-form" method="POST" accept-charset="UTF-8" action="/registration" autocomplete="off" role="Form">
-            <ul class="form__error"></ul>
-            <input type="hidden" name="plan-name" value="Personal" />
-            <div class="form-group">
-                <div class="signin-label-aligner"><label for="name">NAME</label></div>
-                <input type="text" required class="form-control" id="name" placeholder="Your Full Name" name="name">
-              </div>
-            <div class="form-group">
-              <div class="signin-label-aligner"><label for="email">EMAIL ADDRESS</label></div>
-              <input type="email" required class="form-control" id="email" placeholder="you@example.com" name="email">
-            </div>
-            <div class="form-group">
-              <div class="signin-label-aligner"><label for="password">PASSWORD</label></div>
-              <input type="password" required class="form-control" id="password" placeholder="5+ characters" name="password">
-            </div>                  
-            <button type="submit" class="button wt-button">SIGN UP</button>
-            <div class="no-account">By clicking Sign Up You agree to the <a href="{{ site.baseurl }}/terms/" target="_blank" class="link-wt-blue">Terms of Service</a> and <a href="{{ site.baseurl }}/privacy-policy/" target="_blank" class="link-wt-blue">Privacy Policy</a><br /><br />Already have an account? <span class="hide-on-mobile"><a href="{{ site.baseurl }}/signin/" class="link-wt-blue">Login</a></span><span class="show-on-mobile">Please login through desktop to access the dashboard.</span></div>
-          </form>                
+  <!-- <div class="row">
+    <div class="container"> -->
+  <!-- Signup Form -->
+  <div class="row zIndexOne">
+    <div class="col-sm-12 col-md-4 row__padTB100 signup-col mobile-text-center">
+      <div class="wt-navbar-logo mobile-ele-center">
+        <a class="wt-navbar-brand" href="{{ site.baseurl }}/"></a>
+      </div>
+      <h1 class="wt-title section-subtitle no-margin">
+        Create your<br />free account
+      </h1>
+      <form
+        id="signup-form"
+        class="wt-form"
+        method="POST"
+        accept-charset="UTF-8"
+        action="/registration"
+        autocomplete="off"
+        role="Form"
+      >
+        <ul class="form__error"></ul>
+        <input type="hidden" name="plan-name" value="Personal" />
+        <div class="form-group">
+          <div class="signin-label-aligner">
+            <label for="name">NAME</label>
+          </div>
+          <input
+            type="text"
+            required
+            class="form-control"
+            id="name"
+            placeholder="Your Full Name"
+            name="name"
+          />
         </div>
-        <!-- <div class="col-sm-12 col-md-6">
+        <div class="form-group">
+          <div class="signin-label-aligner">
+            <label for="email">EMAIL ADDRESS</label>
+          </div>
+          <input
+            type="email"
+            required
+            class="form-control"
+            id="email"
+            placeholder="you@example.com"
+            name="email"
+          />
+        </div>
+        <div class="form-group">
+          <div class="signin-label-aligner">
+            <label for="password">PASSWORD</label>
+          </div>
+          <input
+            type="password"
+            required
+            class="form-control"
+            id="password"
+            placeholder="5+ characters"
+            name="password"
+          />
+        </div>
+        <button type="submit" class="button wt-button">SIGN UP</button>
+        <div class="no-account">
+          By clicking Sign Up You agree to the
+          <a
+            href="{{ site.baseurl }}/terms/"
+            target="_blank"
+            class="link-wt-blue"
+            >Terms of Service</a
+          >
+          and
+          <a
+            href="{{ site.baseurl }}/privacy-policy/"
+            target="_blank"
+            class="link-wt-blue"
+            >Privacy Policy</a
+          ><br /><br />Already have an account?
+          <span class="hide-on-mobile"
+            ><a href="{{ site.baseurl }}/signin/" class="link-wt-blue"
+              >Login</a
+            ></span
+          ><span class="show-on-mobile"
+            >Please login through desktop to access the dashboard.</span
+          >
+        </div>
+      </form>
+    </div>
+    <!-- <div class="col-sm-12 col-md-6">
           <div class="bg-gray"></div>
         </div> -->
+  </div>
+  <div class="sticky-section to-left signup">
+    <div>
+      <div class="slider-signup">
+        <div>
+          “Wootag is how all video marketing should be. The Wootag platform
+          brilliantly infuses video with the opportunity to interact directly
+          with the viewer, thus moving the audience from passive to active
+          engagement.”<br /><br />Yang Minn, Senior Director of Marketing,
+          Tennis - Asia, Lagerdère Sports
+        </div>
+        <div>
+          “Engagement-wise, Wootagged content comprised of the right interaction
+          elements gave us better traction with conventional, static online
+          posts.”<br /><br />Glenn Estrella, Sr Vice President Marketing, Globe
+          Digital Ventures
+        </div>
+        <div>
+          “Measuring impact of online video beyond brand metrics remained an
+          unconquered territory and now we have the ability to make video
+          actionable and shoppable using Wootag.”<br /><br />Chief Digital
+          Officer, GroupM
+        </div>
+      </div>
+      <div class="clients">
+        <div class="title">TRUSTED BY:</div>
+        <div class="logos">
+          <div>
+            <img
+              src="{{
+                site.baseurl
+              }}/assets/images/client_logos/signup/visa.svg"
+              style="height:16px;width:48px;"
+            />
+          </div>
+          <div>
+            <img
+              src="{{
+                site.baseurl
+              }}/assets/images/client_logos/signup/coke.svg"
+              style="height:21px;width:64px;"
+            />
+          </div>
+          <div>
+            <img
+              src="{{
+                site.baseurl
+              }}/assets/images/client_logos/signup/dentsu.svg"
+              style="height:15px;width:70px;"
+            />
+          </div>
+          <div>
+            <img
+              src="{{
+                site.baseurl
+              }}/assets/images/client_logos/signup/ford.svg"
+              style="height:24px;width:64px;"
+            />
+          </div>
+          <div>
+            <img
+              src="{{
+                site.baseurl
+              }}/assets/images/client_logos/signup/paypal.svg"
+              style="height:17px;width:65px;"
+            />
+          </div>
+          <div>
+            <img
+              src="{{
+                site.baseurl
+              }}/assets/images/client_logos/signup/nestle.svg"
+              style="height:15px;width:55px;"
+            />
+          </div>
+        </div>
       </div>
     </div>
   </div>
+  <!-- </div>
+  </div> -->
 </div>
