@@ -328,7 +328,7 @@ $(document).on('ready', function() {
   function checkDemoPlayerStatus() {
     stickyNavFunc();
     DEMO_PLAYER_IN_VIEW = isScrolledIntoView('.featured-player');
-    console.log('DEMO_PLAYER_IN_VIEW', DEMO_PLAYER_IN_VIEW);
+    // console.log('DEMO_PLAYER_IN_VIEW', DEMO_PLAYER_IN_VIEW);
     if (DEMO_PLAYER_IN_VIEW && notPlayedEver) {
       clearTimeout(theTimeout);
       playDemoPlayerAnimation();
