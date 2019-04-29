@@ -828,25 +828,10 @@ header{
       font-size: 24px;
       line-height: 42px;
       font-weight: 400;
-      color: $color_text_white;
-      
+      color: $color_text_white;      
     }
   }
   .sitback-comment {
-    // // &::before{
-    // //   background: $color_text_dark_gray;
-    // //   content: '';
-    // //   display: inline-block;
-    // //   height:1px;
-    // //   margin: 15px 0;
-    // //   width: 80px;
-    // //   opacity:0.5;
-    // // }
-    // &.noHeader{
-    //   &::before {
-    //     display: none;
-    //   }
-    // }
     .comment-text{
       color: $color_text_white;
       font-size: 16px;
@@ -859,6 +844,28 @@ header{
       font-size: 16px;
       line-height: 28px;
     }    
+  }
+  &.light-theme {
+    background: none;
+    .sitback-content{      
+      h3 {        
+        color: $color_text_dark_gray;      
+      }
+    }
+    .sitback-comment {
+      .comment-text{
+        color: $color_text_lightest_gray;
+        line-height: 24px;
+      }
+      .comment-by{
+        color: $color_text_lightest_gray;
+        line-height: 24px;
+      }    
+      .text-dark-bold{
+        color: $color_text_dark_gray;
+        font-weight: 500;
+      }
+    }
   }
   .slider-buttons{
     display: flex;
@@ -3403,5 +3410,166 @@ Why Wootag---
         }
       }
     }
+  }
+}
+
+// Partners---
+.header-partners{
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .partner-logo{
+    max-height: 100px;
+    img{
+      height: auto;
+      width: 100%;
+      max-width: 150px;
+    }
+  }
+}
+
+.partner-videos{
+  padding-bottom: 0px;
+  .partner-video-item{
+    padding-bottom: 60px;
+    display: block;
+    
+    &:nth-child(2n-1){
+      flex-direction: row-reverse;
+    }
+  }
+  &.featured{    
+    .partner-video-item{
+      &:nth-child(2n-1){
+        flex-direction: row;
+      }
+    }
+  }
+  @media (min-width: 767px) {
+    .partner-video-item{
+      display: flex;
+      padding-bottom: 100px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    &.featured{ 
+      .partner-video-item{
+        padding-bottom: 0;
+      }
+    }
+  }
+}
+.insights{
+  text-align: center;
+  margin-bottom: 20px;
+  .performance{
+    font-size: 36px;
+    font-weight: 300;
+    margin-bottom: 28px;
+    margin-top: 60px;
+    line-height: 1em;
+  }
+  .area{
+    font-size: 24px;
+    margin-bottom: 28px;
+  }
+  .description{
+    font-size: 16px;
+    color: $color_text_lightest_gray;
+    line-height: 24px;
+    margin-bottom: 20px;
+  }
+  @media (min-width: 767px) {
+    text-align: left;
+  }
+}
+
+.partner_videos{
+  padding-top: 0;
+  @media (min-width: 767px) {
+    padding-top: 100px;
+  }
+}
+
+.testimonial-partner{
+  background-color: $color_theme_dark;
+  text-align: center;
+  margin-top: 0px;
+  margin-bottom: 80px;
+  >.row{
+    padding: 80px 0;
+  }
+  h1{
+    font-size: 24px;
+    color: white;
+    font-weight: 300;
+    line-height: 1.3em;
+  }
+  .author{
+    p{
+      line-height: 1.1em;
+      font-size: 16px;
+    }
+  }
+  @media (min-width: 767px) {
+    text-align: left;
+    margin-top: 100px;
+    margin-bottom: 40px;
+    >.row{
+      padding: 120px 0;
+    }
+    h1{
+      font-size: 36px;
+    }
+    .author{
+      p{
+        font-size: 20px;
+      }
+    }
+    
+  }
+}
+
+.partner-footer{
+  padding-top:40px;
+}
+
+.for-default-only{
+  margin: 100px 0;
+  .section-subtitle{
+    text-align: center;
+  }
+  ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin:0;
+    padding: 0;
+    flex-wrap: wrap;
+    flex-direction: column;
+    li{
+      margin: 40px 40px;
+    }    
+  }
+  @media (min-width: 767px) {
+    .section-subtitle{
+      text-align: left;
+    }
+    ul{
+      flex-direction: row;
+      justify-content: space-between;
+      li{
+        &:first-child{
+          margin-left: 0px;
+        }
+      }
+    }
+  }
+}
+.partner-not-found{
+  padding: 60px 0 0;
+  .wt-title{
+    font-size: 36px;
   }
 }

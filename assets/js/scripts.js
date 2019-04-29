@@ -34,7 +34,7 @@ if (header) {
 
 // utils- hostname---
 var host = window.location.hostname === 'localhost' ? 'wtstaging.wootag.com' : window.location.hostname;
-var domain = `https://${host}`;
+var domain = 'https://'+ host;
 function extractHostname(url) {
   var hostname;
   //find & remove protocol (http, ftp, etc.) and get hostname
@@ -980,8 +980,124 @@ $(document).on('ready', function() {
       });
       break;
     }
+    case 'partners': {
+      // fetch partner categories to set filter buttons on UI---
+      // var domain = window.location.hostname === 'localhost' ? 'http://localhost:4000' : 'https://'+ window.location.hostname;
+      // var jsonPath = domain + '/assets/data/partners-unruly.json';
+      var partner = urlParam('partner');
+      if(partner) {
+        var jsonPath = domain + '/api/explore?partner='+partner;
+        $.getJSON(jsonPath, function (data) {
+          if(data) {
+            $('.for-default-only').remove();
+            processPartnerUI(data);
+            $('.partner-not-found').remove();
+          }
+        }).error(function(err){
+          var errMessage = err && err.responseJSON && err.responseJSON.message;
+          $('.partner-not-found .wt-title').text(errMessage);
+          setDefaultForPartnerPage();
+        });
+      } 
+      // default partners page---
+      else {
+        setDefaultForPartnerPage();
+        $('.partner-not-found').remove();        
+      }
+      break;
+    }
     default: {
       return;
+    }
+  }
+
+  function setDefaultForPartnerPage(data) {
+    $('.partner-logo').find('>img').attr('src', domain+'/assets/images/wootag-logo-light.svg');
+    $('.partner-logo').find('>img').attr('alt', 'Wootag');
+
+    $('.for-partner-only').remove();
+
+    // get the partners list---for default and wrong partner parameter case
+    var jsonPath = domain + '/api/explore/partner';
+    $.getJSON(jsonPath, function (data) {
+      if(data) {
+         var cloneLi = $('.for-default-only ul li').clone();
+         $('.for-default-only ul li').remove();
+         for ( var j = 0; j < data.partners.length; j++ ) {
+            var tempLi = cloneLi.clone();
+            tempLi.find('a').attr('href', domain + '/explore/partners/?partner='+ data.partners[j].name);
+            tempLi.find('img').attr('src', data.partners[j].logo);
+            tempLi.find('img').attr('alt', data.partners[j].name);
+            $('.for-default-only ul').append(tempLi);
+         }
+         $('.loader').remove();
+      }
+    });
+  }
+  function processPartnerUI(data) {
+    $('.partner-logo').find('>img').attr('src', data.logo);
+    $('.partner-logo').find('>img').attr('alt', data.partner);
+
+    var partnerVideos = data.videos;
+    if(partnerVideos && partnerVideos.length > 0) {
+       // featured partner video--first one above testimonial
+      generatePartnerVideoUI($('.featured'), partnerVideos[0]);
+
+      // rest of the videos---
+      var cloneEle = $('.partner-videos-container').find('.repeat-video').clone();
+      $('.partner-videos-container').find('.repeat-video').remove();
+
+      // filling up all video ui---
+      for (var _i = 1; _i < partnerVideos.length; _i++ ) {
+        var _tempEle = cloneEle.clone();
+        generatePartnerVideoUI(_tempEle, partnerVideos[_i])
+        $('.partner-videos-container').append(_tempEle);
+      }      
+
+      // all video click events to launch overlay iframe---
+      $('a.trigger_iframe_overlay_video').on('click', function(e){
+        e.preventDefault();
+        var videoUrl = $(this).data('href');
+        showOverlay({ type: 'iframe', href: videoUrl });
+      });
+    } else {
+      $('.partner-videos-container').find('.repeat-video').remove();
+    }
+
+    var partnerTestimonial = data.testimonial;
+    if(partnerTestimonial) {
+      $('.testimonial-partner').find('h1').text('“'+partnerTestimonial.content+'”');
+      var _author = $('.testimonial-partner').find('.author');
+      _author.find('.name').text(partnerTestimonial.name);
+      _author.find('.position').text(partnerTestimonial.position);
+      _author.find('.company').text(partnerTestimonial.company);
+    } else {
+      $('.testimonial-partner').remove();
+    }    
+  }
+
+  function generatePartnerVideoUI(_ele, _videoData) {
+    _ele.find('a').attr('data-href', _videoData.link+'?autoplay=1');
+    _ele.find('img').attr('src', _videoData.cover);
+    _ele.find('img').attr('alt', _videoData.name);
+    _ele.find('h3.mobile-ele-center').text(_videoData.name);
+    _ele.find('.comment-text').text(_videoData.detail);
+    _ele.find('span.features').text(_videoData.feature);
+    //---
+    var insights = _videoData.insights;
+    
+    if (insights && insights.length > 0) {      
+      var cloneInsight = _ele.find('.repeat').clone();
+      _ele.find('.repeat').remove();
+      for (var i = 0; i < insights.length; i++) {
+        var _temp = cloneInsight.clone();
+        _temp.find('.performance').text(insights[i].performance);
+        _temp.find('.area').text(insights[i].area);
+        _temp.find('.description').text(insights[i].description);
+        _ele.find('.insights-container').append(_temp);
+      }
+    } else {
+      _ele.find('.insights-container').remove();
     }
   }
   
@@ -1029,5 +1145,3 @@ $(document).on('ready', function() {
   // })();
 
 });
-
-
