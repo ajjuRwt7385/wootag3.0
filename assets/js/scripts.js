@@ -1021,6 +1021,12 @@ $(document).on('ready', function() {
     var jsonPath = domain + '/api/explore/partner';
     $.getJSON(jsonPath, function (data) {
       if(data) {
+        if(data.page && data.page.title) {
+          $('.partner-header h1').text(data.page.title);
+        }
+        if(data.page && data.page.description) {
+          $('.partner-header p').text(data.page.description);
+        }
          var cloneLi = $('.for-default-only ul li').clone();
          $('.for-default-only ul li').remove();
          for ( var j = 0; j < data.partners.length; j++ ) {
@@ -1037,6 +1043,13 @@ $(document).on('ready', function() {
   function processPartnerUI(data) {
     $('.partner-logo').find('>img').attr('src', data.logo);
     $('.partner-logo').find('>img').attr('alt', data.partner);
+
+    if(data.page && data.page.title) {
+      $('.partner-header h1').text(data.page.title);
+    }
+    if(data.page && data.page.description) {
+      $('.partner-header p').text(data.page.description);
+    }
 
     var partnerVideos = data.videos;
     if(partnerVideos && partnerVideos.length > 0) {
@@ -1082,7 +1095,11 @@ $(document).on('ready', function() {
     _ele.find('img').attr('alt', _videoData.name);
     _ele.find('h3.mobile-ele-center').text(_videoData.name);
     _ele.find('.comment-text').text(_videoData.detail);
-    _ele.find('span.features').text(_videoData.feature);
+    if(_videoData.feature) {
+      _ele.find('span.features').text(_videoData.feature);
+    } else {
+      _ele.find('.comment-by').remove();
+    }
     //---
     var insights = _videoData.insights;
     

@@ -3438,6 +3438,20 @@ Why Wootag---
     &:nth-child(2n-1){
       flex-direction: row-reverse;
     }
+    .video_items{
+      .video_item{
+        a{
+          .overlay{
+            background-color: rgba(0,0,0,0.5);
+          }
+          &:hover{
+            .overlay{
+              background-color: rgba(0,0,0,0.3);
+            }
+          }
+        }
+      }
+    }
   }
   &.featured{    
     .partner-video-item{
