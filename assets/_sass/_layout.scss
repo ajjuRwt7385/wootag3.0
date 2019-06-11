@@ -1676,7 +1676,7 @@ footer{
         left:0;
         top:0;
         transition: all 0.2s ease;
-        background-color: rgba(0,0,0,0.8);
+        background-color: rgba(0,0,0,0.5);
         display: flex;
         padding:0 30px;
         align-items: center;  
@@ -1708,13 +1708,16 @@ footer{
         // text-transform: capitalize;
       } 
       &:hover{
+        .overlay{
+          background-color: rgba(0, 0, 0, 0.8);
+        }
         .img{
           img{
             transform: scale(1.04);
           }
         }     
         .content-center{
-          background-color: rgba(0,0,0,0.5);
+          background-color: rgba(0,0,0,0.2);
         }
         .button-circular{
           background-color: $color_wootag_blue;
@@ -3446,7 +3449,7 @@ Why Wootag---
           }
           &:hover{
             .overlay{
-              background-color: rgba(0,0,0,0.3);
+              background-color: rgba(0,0,0,0.2);
             }
           }
         }
@@ -3563,7 +3566,10 @@ Why Wootag---
     flex-wrap: wrap;
     flex-direction: column;
     li{
-      margin: 40px 40px;
+      margin: 40px;
+      a.defaultCursor{
+        cursor: default;
+      }
     }    
   }
   @media (min-width: 767px) {
@@ -3572,10 +3578,11 @@ Why Wootag---
     }
     ul{
       flex-direction: row;
-      justify-content: space-between;
+      justify-content: flex-start;
       li{
+        margin: 40px 60px 40px 0;
         &:first-child{
-          margin-left: 0px;
+          margin-left: 0px;          
         }
       }
     }

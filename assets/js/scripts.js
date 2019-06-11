@@ -1031,7 +1031,13 @@ $(document).on('ready', function() {
          $('.for-default-only ul li').remove();
          for ( var j = 0; j < data.partners.length; j++ ) {
             var tempLi = cloneLi.clone();
-            tempLi.find('a').attr('href', domain + '/explore/partners/?partner='+ data.partners[j].name);
+            if(data.partners[j].status === 1) {
+              tempLi.find('a').attr('href', domain + '/explore/partners/?partner='+ data.partners[j].name);
+            } else {
+              tempLi.find('a').click(function(e){
+                e.preventDefault();
+              }).addClass('defaultCursor');
+            }
             tempLi.find('img').attr('src', data.partners[j].logo);
             tempLi.find('img').attr('alt', data.partners[j].name);
             $('.for-default-only ul').append(tempLi);
